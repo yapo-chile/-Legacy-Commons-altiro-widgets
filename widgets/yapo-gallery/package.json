@@ -1,0 +1,35 @@
+{
+  "name": "yapo-gallery",
+  "version": "0.1.0",
+  "description": "Generated Nutmeg Web Component",
+  "main": "dist/yapo-gallery.js",
+  "module": "dist/yapo-gallery.js",
+  "unpkg": "dist/yapo-gallery.min.js",
+  "types": "dist/yapo-gallery.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": [
+    "yapo-gallery",
+    "nutmeg"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "npx nutmeg build .",
+    "prebuild": "npx nutmeg clean .",
+    "prepare": "npm run build -- --production",
+    "pretest": "npm run build",
+    "serve": "npx nutmeg serve .",
+    "test": "npx nutmeg test .",
+    "watch": "npx nutmeg watch ."
+  },
+  "dependencies": {
+    "@nutmeg/seed": "0.11.0"
+  },
+  "devDependencies": {
+    "@nutmeg/cli": "0.14.0"
+  }
+}

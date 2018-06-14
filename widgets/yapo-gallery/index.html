@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>yapo-gallery demos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="https://nutmeg.tools/favicon.png">
+
+  <script src="./node_modules/@webcomponents/webcomponentsjs/bundles/webcomponents-sd-ce.js"></script>
+
+  <!-- Use `npm run serve` to start a development server. -->
+
+  <style>
+    body {
+      background-color: #eee;
+      padding: 24px;
+    }
+
+    yapo-gallery {
+      margin: 8px;
+    }
+
+    yapo-gallery.blue {
+      --yapo-gallery-background-color: #03A9F4;
+    }
+  </style>
+</head>
+<body>
+  <yapo-gallery></yapo-gallery>
+
+  <yapo-gallery></yapo-gallery>
+
+  <yapo-gallery>Slot content</yapo-gallery>
+
+  <yapo-gallery class="blue"></yapo-gallery>
+
+  <script>
+    /** Set complex properties */
+    // document.querySelector('<yapo-gallery>').subcategory = String;
+
+  </script>
+
+  <!-- In development `yapo-gallery.bundled.js` will automatically be loaded. -->
+</body>
+</html>
