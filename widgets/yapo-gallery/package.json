@@ -1,7 +1,7 @@
 {
-  "name": "yapo-gallery",
+  "name": "@Yapo/yapo-gallery",
   "version": "0.1.0",
-  "description": "Generated Nutmeg Web Component",
+  "description": "Web Component",
   "main": "dist/yapo-gallery.js",
   "module": "dist/yapo-gallery.js",
   "unpkg": "dist/yapo-gallery.min.js",
@@ -27,7 +27,8 @@
     "watch": "npx nutmeg watch ."
   },
   "dependencies": {
-    "@nutmeg/seed": "0.11.0"
+    "@nutmeg/seed": "0.11.0",
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@nutmeg/cli": "0.14.0"
