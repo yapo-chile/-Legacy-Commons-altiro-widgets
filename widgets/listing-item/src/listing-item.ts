@@ -6,6 +6,7 @@ export class ListingItem extends Seed {
   @Property() public adId: number = 0;
   @Property() public adParams: string = '';
   @Property() public category: string = '';
+  @Property() public categoryName: string = '';
   @Property() public commune: string = '';
   @Property() public currency: string = '';
   @Property() public date: string = '';
@@ -17,6 +18,9 @@ export class ListingItem extends Seed {
   @Property() public title: string = '';
   @Property() public url: string = '';
   @Property() public label: string = '';
+  @Property() public location: string = '';
+  @Property() public isThumb: string = '';
+  @Property() public isFavorite: string = '';
 
   private adParamsComponent: AdParams = new AdParams(this.adParams);
 
@@ -26,8 +30,14 @@ export class ListingItem extends Seed {
 
   /** The component instance has been inserted into the DOM. */
   public connectedCallback() {
-    this.adParamsComponent = new AdParams(this.adParams);
     super.connectedCallback();
+    this.adParamsComponent = new AdParams(this.adParams);
+
+    if (this.isThumb == '1') {
+      this.url = this.url.replace('thumb', 'image');
+    }
+
+    this.listenWindowWith();
   }
 
   /** The component instance has been removed from the DOM. */
@@ -50,19 +60,12 @@ export class ListingItem extends Seed {
     return html`
       <style>
         :host {
-          border-bottom: 2px solid #CCC;
-          border-top: 2px solid #CCC;
+          border-bottom: 2px solid #F8F8F8;
+          border-top: 2px solid #F8F8F8;
           border-radius: 5px;
           margin: 0;
           padding: 0;
           width: 100%;
-        }
-        :host:first-child {
-          border-top: 0px;
-        }
-
-        :host:last-child {
-          border-bottom: 0px;
         }
 
         * {
@@ -87,6 +90,11 @@ export class ListingItem extends Seed {
         
         .listingItem-box .__hidden{
           display: none;
+        }
+
+        .listingItem-box.fourColumns .listingItem-info {
+          min-width: 45%;
+          max-width: 45%;
         }
 
         .listingItem-image {
@@ -118,6 +126,7 @@ export class ListingItem extends Seed {
           padding: 10px;
           padding-top: 19px;
           padding-right: 0;
+          max-width: 85%;
         }
 
         .listingItem-infoTitle {
@@ -147,11 +156,12 @@ export class ListingItem extends Seed {
           font-size: 10px;
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: flex-start;
         }
 
         .listingItem-infoBottomDate {
           color: grey;
+          margin-right: 10px;
         }
 
         .listingItem-infoBottomType {
@@ -161,10 +171,30 @@ export class ListingItem extends Seed {
         }
 
         .listingItem-infoIcons {
+          font-size: 22px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           padding: 10px 5px;
+        }
+
+        .listingItem-infoLocation {
+          flex-grow: 1;
+          font-size: 13px;
+          font-weight: 100;
+          display: flex;
+          flex-direction: column;
+          padding-left: 30px;
+          justify-content: center;
+          width: 35%;
+        }
+
+        .listingItem-infoLocation .__locationRow {
+          margin-bottom: 10px;
+        }
+
+        .listingItem-infoLocation .__locationRow:last-child {
+          margin-bottom: 0;
         }
 
         .listingItem-infoLastBottom {
@@ -175,25 +205,71 @@ export class ListingItem extends Seed {
     `;
   }
 
+  private renderElement(param:string, typeEl:string, classN:string, text?: string): TemplateResult {
+    let el = document.createElement('' + typeEl + '');
+
+    if (param && param != '') {
+      el.className = '' + classN + '';
+      if (text) {
+        el.innerHTML = '' + text + '';
+      }
+    }
+
+    return html`${el}`;
+  }
+
+  private renderTemplate(fCalled: TemplateResult, param: string) {
+    if (param && param != '') {
+      return fCalled;
+    }
+
+    return '';
+  }
+
+  private listenWindowWith() {
+    let elBox = this.shadowRoot.querySelector('.listingItem-box'); //classList.add('fourColumns')
+    let elLocation = this.shadowRoot.querySelector('.listingItem-infoLocation');
+
+    if (window.innerWidth >= 700) {
+      if (elBox === null) return;
+      if (elLocation === null) return;
+      elBox.classList.add('fourColumns');
+      elLocation.classList.remove('__hidden');
+    }
+
+    window.addEventListener('resize', function(){
+      if (elBox === null) return;
+      if (elLocation === null) return;
+
+      if (window.innerWidth >= 700) {
+        elBox.classList.add('fourColumns');
+        elLocation.classList.remove('__hidden');
+      } else {
+        elBox.classList.remove('fourColumns');
+        elLocation.classList.add('__hidden');
+      }
+    }, true);
+  }
+
   /** HTML Template for the component. */
   public get template(): TemplateResult {
     return html`
       <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
-      
       <div id="ad-${this.adId}" class="listingItem-box">
         <div class="listingItem-image __mainColumn">
-          <span class="listingItem-imageLabel">${this.label}</span>
+          ${this.renderElement(this.label, 'SPAN', 'listingItem-imageLabel', this.label)}
+          
           <img src="${this.url}" alt="${this.title}"/>
         </div>
 
         <div class="listingItem-info __mainColumn">
-          <h2 class="listingItem-infoTitle __infoRow">
-            <i class="fal fa-map-marker-alt"></i>
+          <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
+            ${this.renderElement(this.location, 'I', 'fal fa-map-marker-alt')}
             <span> ${this.title} </span>
           </h2>
-          <div class="listingItem-infoPrice __infoRow">${this.currency} ${this.price}</div>
+          <div class="listingItem-infoPrice __infoRow">${this.price}</div>
           <ul class="listingItem-infoAdParams __infoRow">
-            ${this.adParamsComponent.template()}
+            ${this.renderTemplate(this.adParamsComponent.template(), this.adParams )}
           </ul>
           <div class="listingItem-infoBottom __infoRow">
             <div class="listingItem-infoBottomDate">${this.date}</div>
@@ -202,16 +278,16 @@ export class ListingItem extends Seed {
         </div>
 
         <div class="listingItem-infoLocation __mainColumn __hidden">
-          <div class="listingItem-infoLocationRegion __infoRow">${this.region}</div>
-          <div class="listingItem-infoLocationCommune __infoRow">${this.commune}</div>
-          <div class="listingItem-infoLocationCategory __infoRow">${this.category}</div>
+          <div class="listingItem-infoLocationRegion __locationRow">${this.region}</div>
+          <div class="listingItem-infoLocationCommune __locationRow">${this.commune}</div>
+          <div class="listingItem-infoLocationCategory __locationRow">${this.categoryName}</div>
         </div>
 
         <div class="listingItem-infoIcons __mainColumn">
           <div class="listingItem-infoLastTop">
-            <i class="fal fa-heart"></i>
+            ${this.renderElement(this.isFavorite, 'I', 'fal fal fa-heart')}
           </div>
-          <div class="listingItem-infoLastBottom">
+          <div class="listingItem-infoLastBottom __hidden">
             <i class="fal fa-question-circle"></i>
           </div>
         </div>
