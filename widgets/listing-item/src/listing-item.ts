@@ -279,6 +279,7 @@ export class ListingItem extends Seed {
           </h2>
           <div class="listingItem-infoPrice __infoRow">${this.price}</div>
           <ul class="listingItem-infoAdParams __infoRow">
+            <!-- @ToDo: refactor for dinamycs params if new parameters are added -->
             ${this.renderTemplate(this.adParamsComponent.template(), this.adParams )}
           </ul>
           <div class="listingItem-infoBottom __infoRow">
