@@ -37,6 +37,8 @@ export class ListingItem extends Seed {
       this.url = this.url.replace('thumb', 'image');
     }
 
+    this.price = this.price.replace(',00', '');
+
     this.listenWindowWith();
   }
 
@@ -69,7 +71,7 @@ export class ListingItem extends Seed {
         }
 
         * {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+          font-family: Helvetica, Arial, sans-serif;
         }
 
         .listingItem-box {
@@ -95,6 +97,10 @@ export class ListingItem extends Seed {
         .listingItem-box.fourColumns .listingItem-info {
           min-width: 45%;
           max-width: 45%;
+        }
+
+        .listingItem-box.fourColumns .listingItem-infoBottom {
+          justify-content: flex-start;
         }
 
         .listingItem-image {
@@ -156,18 +162,21 @@ export class ListingItem extends Seed {
           font-size: 10px;
           display: flex;
           flex-direction: row;
-          justify-content: flex-start;
+          justify-content: space-between;
         }
 
         .listingItem-infoBottomDate {
+          align-self: flex-end;
           color: grey;
           margin-right: 10px;
         }
 
         .listingItem-infoBottomType {
+          align-self: flex-end;
           color: #4376b0;
           font-size: 9px;
           text-transform: uppercase;
+          justify-content: center;
         }
 
         .listingItem-infoIcons {
@@ -176,6 +185,7 @@ export class ListingItem extends Seed {
           flex-direction: column;
           justify-content: space-between;
           padding: 10px 5px;
+          min-width: 25px;
         }
 
         .listingItem-infoLocation {
