@@ -93,7 +93,13 @@ export class AdParams implements IAdParams{
         const paramsParsed:any = this.init(params);
 
         return html`
-            ${Object.keys(paramsParsed).map(element => this.renderParam(element, paramsParsed[element]))}
+            ${Object.keys(paramsParsed).map(element => {
+                if (paramsParsed[element] != '') {
+                    return this.renderParam(element, paramsParsed[element])
+                }
+
+                return ''
+            })}
         `
     }
 }

@@ -1,6 +1,5 @@
 import { Seed, Property, html, TemplateResult } from '@nutmeg/seed';
 import { AdParams } from './ad-params';
-import { IAdParams } from './IAdParams'
 
 export class ListingItem extends Seed {
   @Property() public adId: number = 0;
