@@ -32,17 +32,19 @@ export class AdParams implements IAdParams{
             <style>
                 .listingItem-infoAdParam {
                     font-size: 10px;
+                    font-weight: 500; 
                     display: flex;
-                    margin-right: 7px;
+                    margin-right: 5px;
                 }
 
                 .listingItem-infoAdParam i {
+                    font-size: 11px;
                     align-self: center;
                 }
 
                 .listingItem-infoAdParam span {
                     align-self: center;
-                    margin-left: 5px;
+                    margin-left: 3px;
                     display: inline-block;
                 }
 
@@ -59,6 +61,9 @@ export class AdParams implements IAdParams{
 
     private static renderParam(type:string, data:string): TemplateResult {
         let icon = document.createElement('I');
+        let span = document.createElement('SPAN');
+        let text = data.replace(/m2/g, 'm' + '<sup>2</sup>');
+        span.innerHTML = text;
 
         switch(type) {
             case 'rooms': {
@@ -84,7 +89,7 @@ export class AdParams implements IAdParams{
         return html`
             <li class="listingItem-infoAdParam">
                 ${icon}
-                <span>${data}</span>
+                ${span}
             </li>
         `;
     }

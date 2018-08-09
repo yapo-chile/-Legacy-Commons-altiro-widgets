@@ -171,8 +171,9 @@ export class ListingItem extends Seed {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 10px 5px;
-          min-width: 25px;
+          padding: 10px 3px;
+          min-width: 20px;
+          max-width: 20px;
         }
 
         .listingItem-infoLocation {
