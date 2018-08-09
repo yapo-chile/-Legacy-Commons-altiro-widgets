@@ -90,15 +90,6 @@ export class ListingItem extends Seed {
           display: none;
         }
 
-        .listingItem-box.fourColumns .listingItem-info {
-          min-width: 45%;
-          max-width: 45%;
-        }
-
-        .listingItem-box.fourColumns .listingItem-infoBottom {
-          justify-content: flex-start;
-        }
-
         .listingItem-image {
           min-width: 122px;
           max-width: 122px;
@@ -208,6 +199,15 @@ export class ListingItem extends Seed {
         }
 
         @media (min-width: 700px) {
+          .listingItem-info {
+            min-width: 45%;
+            max-width: 45%;
+          }
+
+          .listingItem-infoBottom {
+            justify-content: flex-start;
+          }
+          
           .listingItem-infoLocation {
             display: flex;
           }
@@ -229,31 +229,6 @@ export class ListingItem extends Seed {
 
     return html`${el}`;
   }
-
-  // private listenWindowWith() {
-  //   let elBox = this.shadowRoot.querySelector('.listingItem-box'); //classList.add('fourColumns')
-  //   let elLocation = this.shadowRoot.querySelector('.listingItem-infoLocation');
-
-  //   if (window.innerWidth >= 700) {
-  //     if (elBox === null) return;
-  //     if (elLocation === null) return;
-  //     elBox.classList.add('fourColumns');
-  //     elLocation.classList.remove('__hidden');
-  //   }
-
-  //   window.addEventListener('resize', function() {
-  //     if (elBox === null) return;
-  //     if (elLocation === null) return;
-
-  //     if (window.innerWidth >= 700) {
-  //       elBox.classList.add('fourColumns');
-  //       elLocation.classList.remove('__hidden');
-  //     } else {
-  //       elBox.classList.remove('fourColumns');
-  //       elLocation.classList.add('__hidden');
-  //     }
-  //   }, true);
-  // }
 
   /** HTML Template for the component. */
   public get template(): TemplateResult {
