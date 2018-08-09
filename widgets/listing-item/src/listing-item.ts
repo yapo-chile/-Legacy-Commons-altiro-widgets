@@ -36,7 +36,7 @@ export class ListingItem extends Seed {
 
     this.price = this.price.replace(',00', '');
 
-    this.listenWindowWith();
+    // this.listenWindowWith();
   }
 
   /** The component instance has been removed from the DOM. */
@@ -189,7 +189,7 @@ export class ListingItem extends Seed {
           flex-grow: 1;
           font-size: 13px;
           font-weight: 100;
-          display: flex;
+          display: none;
           flex-direction: column;
           padding-left: 30px;
           justify-content: center;
@@ -206,6 +206,12 @@ export class ListingItem extends Seed {
 
         .listingItem-infoLastBottom {
           color: #4376b0;
+        }
+
+        @media (min-width: 700px) {
+          .listingItem-infoLocation {
+            display: flex;
+          }
         }
       </style>
       ${AdParams.styles()}
@@ -225,30 +231,30 @@ export class ListingItem extends Seed {
     return html`${el}`;
   }
 
-  private listenWindowWith() {
-    let elBox = this.shadowRoot.querySelector('.listingItem-box'); //classList.add('fourColumns')
-    let elLocation = this.shadowRoot.querySelector('.listingItem-infoLocation');
+  // private listenWindowWith() {
+  //   let elBox = this.shadowRoot.querySelector('.listingItem-box'); //classList.add('fourColumns')
+  //   let elLocation = this.shadowRoot.querySelector('.listingItem-infoLocation');
 
-    if (window.innerWidth >= 700) {
-      if (elBox === null) return;
-      if (elLocation === null) return;
-      elBox.classList.add('fourColumns');
-      elLocation.classList.remove('__hidden');
-    }
+  //   if (window.innerWidth >= 700) {
+  //     if (elBox === null) return;
+  //     if (elLocation === null) return;
+  //     elBox.classList.add('fourColumns');
+  //     elLocation.classList.remove('__hidden');
+  //   }
 
-    window.addEventListener('resize', function() {
-      if (elBox === null) return;
-      if (elLocation === null) return;
+  //   window.addEventListener('resize', function() {
+  //     if (elBox === null) return;
+  //     if (elLocation === null) return;
 
-      if (window.innerWidth >= 700) {
-        elBox.classList.add('fourColumns');
-        elLocation.classList.remove('__hidden');
-      } else {
-        elBox.classList.remove('fourColumns');
-        elLocation.classList.add('__hidden');
-      }
-    }, true);
-  }
+  //     if (window.innerWidth >= 700) {
+  //       elBox.classList.add('fourColumns');
+  //       elLocation.classList.remove('__hidden');
+  //     } else {
+  //       elBox.classList.remove('fourColumns');
+  //       elLocation.classList.add('__hidden');
+  //     }
+  //   }, true);
+  // }
 
   /** HTML Template for the component. */
   public get template(): TemplateResult {
@@ -277,7 +283,7 @@ export class ListingItem extends Seed {
           </div>
         </div>
 
-        <div class="listingItem-infoLocation __mainColumn __hidden">
+        <div class="listingItem-infoLocation">
           <div class="listingItem-infoLocationRegion __locationRow">${this.region}</div>
           <div class="listingItem-infoLocationCommune __locationRow">${this.commune}</div>
           <div class="listingItem-infoLocationCategory __locationRow">${this.categoryName}</div>
