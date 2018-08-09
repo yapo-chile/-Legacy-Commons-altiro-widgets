@@ -66,7 +66,7 @@ export class AdParams implements IAdParams{
                 break;
             }
             case 'bathrooms': {
-                icon.className = 'fal fa-bed';
+                icon.className = 'fal fa-bath';
                 break;
             }
 
@@ -80,7 +80,7 @@ export class AdParams implements IAdParams{
                 break;
             }
         }
-        
+
         return html`
             <li class="listingItem-infoAdParam">
                 ${icon}
