@@ -44,7 +44,7 @@ export class AdParams implements IAdParams{
 
                 .listingItem-infoAdParam span {
                     align-self: center;
-                    margin-left: 3px;
+                    margin-left: 2px;
                     display: inline-block;
                 }
 
