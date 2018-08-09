@@ -22,8 +22,6 @@ export class ListingItem extends Seed {
   @Property() public isThumb: string = '';
   @Property() public isFavorite: string = '';
 
-  private adParamsComponent: AdParams = new AdParams(this.adParams);
-
   constructor() {
     super();
   }
@@ -31,7 +29,6 @@ export class ListingItem extends Seed {
   /** The component instance has been inserted into the DOM. */
   public connectedCallback() {
     super.connectedCallback();
-    this.adParamsComponent = new AdParams(this.adParams);
 
     if (this.isThumb == '1') {
       this.url = this.url.replace('thumb', 'image');
@@ -211,7 +208,7 @@ export class ListingItem extends Seed {
           color: #4376b0;
         }
       </style>
-      ${this.adParamsComponent.styles()}
+      ${AdParams.styles()}
     `;
   }
 
@@ -228,14 +225,6 @@ export class ListingItem extends Seed {
     return html`${el}`;
   }
 
-  private renderTemplate(fCalled: TemplateResult, param: string) {
-    if (param && param != '') {
-      return fCalled;
-    }
-
-    return '';
-  }
-
   private listenWindowWith() {
     let elBox = this.shadowRoot.querySelector('.listingItem-box'); //classList.add('fourColumns')
     let elLocation = this.shadowRoot.querySelector('.listingItem-infoLocation');
@@ -247,7 +236,7 @@ export class ListingItem extends Seed {
       elLocation.classList.remove('__hidden');
     }
 
-    window.addEventListener('resize', function(){
+    window.addEventListener('resize', function() {
       if (elBox === null) return;
       if (elLocation === null) return;
 
@@ -280,7 +269,7 @@ export class ListingItem extends Seed {
           <div class="listingItem-infoPrice __infoRow">${this.price}</div>
           <ul class="listingItem-infoAdParams __infoRow">
             <!-- @ToDo: refactor for dinamycs params if new parameters are added -->
-            ${this.renderTemplate(this.adParamsComponent.template(), this.adParams )}
+            ${AdParams.template(this.adParams)}
           </ul>
           <div class="listingItem-infoBottom __infoRow">
             <div class="listingItem-infoBottomDate">${this.date}</div>

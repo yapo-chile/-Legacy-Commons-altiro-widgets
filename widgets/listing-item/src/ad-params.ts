@@ -9,54 +9,65 @@ export class AdParams implements IAdParams{
     capacity?: string;
     estateType?: string;
 
-    constructor (stringParams: string) {
+    private static init(stringParams: string) {
+        let params = {
+            rooms: '',
+            bathrooms: '',
+            surface: '',
+            surfaceUtil: '',
+            capacity: '',
+            estateType: ''
+        };
+
         if (stringParams) {
             const parsedParams:IAdParams = JSON.parse(stringParams);
-            this.rooms = parsedParams.rooms ? parsedParams.rooms : '';
-            this.surface = parsedParams.surface ? parsedParams.surface : '';
-            this.surfaceUtil = parsedParams.surfaceUtil ? parsedParams.surfaceUtil : '';
-            this.bathrooms = parsedParams.bathrooms ? parsedParams.bathrooms : '';
-            this.capacity = parsedParams.capacity ? parsedParams.capacity : '';
-            this.estateType = parsedParams.estateType ? parsedParams.estateType : '';
+            params.rooms = parsedParams.rooms ? parsedParams.rooms : '';
+            params.surface = parsedParams.surface ? parsedParams.surface : '';
+            params.surfaceUtil = parsedParams.surfaceUtil ? parsedParams.surfaceUtil : '';
+            params.bathrooms = parsedParams.bathrooms ? parsedParams.bathrooms : '';
+            params.capacity = parsedParams.capacity ? parsedParams.capacity : '';
+            params.estateType = parsedParams.estateType ? parsedParams.estateType : '';
         }
+
+        return params;
     }
 
-    private renderParams(param:string) {
+    /* private static renderParams(param:string, paramOb:IAdParams) {
         let li = document.createElement('LI');
         let icon = document.createElement('I');
         let span = document.createElement('SPAN');
         li.className = 'listingItem-infoAdParam';
         
-        if (param == 'bathrooms' && this.bathrooms) {
-            if (parseInt(this.bathrooms) >= 4) {
-                this.bathrooms += '+';
+        if (param == 'bathrooms' && paramOb.bathrooms) {
+            if (parseInt(paramOb.bathrooms) >= 4) {
+                paramOb.bathrooms += '+';
             }
 
             icon.className = 'fal fa-bath';
-            span.innerHTML = this.bathrooms;
-        } else if (param == 'rooms' && this.rooms) {
-            if (parseInt(this.rooms) >= 4) {
-                this.rooms += '+';
+            span.innerHTML = paramOb.bathrooms;
+        } else if (param == 'rooms' && paramOb.rooms) {
+            if (parseInt(paramOb.rooms) >= 4) {
+                paramOb.rooms += '-';
             }
 
             icon.className = 'fal fa-bed';
-            span.innerHTML = this.rooms;
-        } else if (param == 'capacity' && this.capacity) {    
+            span.innerHTML = paramOb.rooms;
+        } else if (param == 'capacity' && paramOb.capacity) {    
                 icon.className = 'fal fa-users';
-                span.innerHTML = this.capacity;
-        } else if (param == 'surface' && (this.surface || this.surfaceUtil)) {
+                span.innerHTML = paramOb.capacity;
+        } else if (param == 'surface' && (paramOb.surface || paramOb.surfaceUtil)) {
             let totalSurface = '';
 
-            if (this.surfaceUtil && this.surfaceUtil != '') {
-                totalSurface += this.isHectare(this.surfaceUtil);
+            if (paramOb.surfaceUtil && paramOb.surfaceUtil != '') {
+                totalSurface += this.isHectare(paramOb.surfaceUtil, paramOb.estateType);
 
-                if (this.surfaceUtil && this.surfaceUtil != '') {
+                if (paramOb.surfaceUtil && paramOb.surfaceUtil != '') {
                     totalSurface += '&nbsp/&nbsp';
                 }
             }
 
-            if (this.surface && this.surface != '') {
-                totalSurface += this.isHectare(this.surface);
+            if (paramOb.surface && paramOb.surface != '') {
+                totalSurface += this.isHectare(paramOb.surface);
             }
 
             icon.className = 'fal fa-expand';
@@ -72,13 +83,12 @@ export class AdParams implements IAdParams{
         }
             
         return html``;
-    }
+    }*/
 
-    private isHectare (value:string) {
-        let span
+    private static isHectare (value:string, estate:string) {
         let sup = document.createElement('SUP');
 
-        if (parseInt(value) > 9999 && this.estateType && parseInt(this.estateType) == 5) {
+        if (parseInt(value) > 9999 && estate && parseInt(estate) == 5) {
             value = '' + parseInt(value) / 10000 + ' ha';
         } else {
             value = value + ' m<sup>2</sup>';
@@ -88,7 +98,7 @@ export class AdParams implements IAdParams{
     }
 
     /** Styling for the component. */
-    public styles(): TemplateResult {
+    public static styles(): TemplateResult {
         return html`
             <style>
                 .listingItem-infoAdParam {
@@ -118,15 +128,35 @@ export class AdParams implements IAdParams{
         `;
     }
 
-    public template (): TemplateResult {
+    private static renderParam(type:string, data:string): TemplateResult {
         return html`
-            ${this.renderParams('rooms')}
+            <li>
+                <i class=""></i>
+                <span>${type} ${data}</span>
+            </li>
+        `;
+    }
+
+    private static renderParamSurface(type:string, data:string): TemplateResult {
+        return html`
+            <li><span></li>
+        `;
+    }
+
+    public static template (params:string): TemplateResult {
+        const paramsParsed:any = this.init(params);
+
+        /*
+        ${this.renderParams('rooms', paramsParsed)}
 
             ${this.renderParams('bathrooms')}
 
             ${this.renderParams('surface')}
 
-            ${this.renderParams('capacity')}
+            ${this.renderParams('capacity')}*/
+
+        return html`
+            ${Object.keys(paramsParsed).map(element => this.renderParam(element, paramsParsed[element]))}
         `
     }
 }
