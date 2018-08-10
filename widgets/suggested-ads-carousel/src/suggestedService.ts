@@ -1,13 +1,23 @@
-import { Ad } from './Ad';
-import ads from './suggestedAdsData';
+import { ResponseSuggestedAd } from './types';
 
 export class SuggestedService {
   ads: any;
-  constructor() {
-    this.ads = ads;
+  uri: string;
+  constructor(uri: string) {
+    this.uri = uri;
   }
-  public getSuggestedAds(adId: string): Promise<Array<Ad>> {
-    const ads: Array<Ad> = this.ads[adId]? this.ads[adId] : [];
-    return Promise.resolve(ads);
+  public getSuggestedAds(adId: string): Promise<ResponseSuggestedAd> {
+    var misCabeceras = new Headers();
+    var miInit: RequestInit = { 
+        method: 'GET',
+        headers:
+          {
+            'Content-Type': 'application/json',
+          },
+        cache: 'default',
+      };
+    return fetch(this.uri, miInit).then((data: Response) => {
+      return data.json();
+    });
   }
 }

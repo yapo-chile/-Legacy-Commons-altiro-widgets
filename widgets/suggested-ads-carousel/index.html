@@ -22,11 +22,27 @@
 
     suggested-ads-carousel.blue {
       --background-color: #03A9F4;
+      --font-family: "Comic Sans MS", cursive, sans-serif;
     }
   </style>
 </head>
 <body>
-  <suggested-ads-carousel ad-id="1000"></suggested-ads-carousel>
+  <suggested-ads-carousel 
+    ad-id="1000"
+    src="http://localhost:8081/api/v1/mock"
+    title="Articulos Relacionados"
+    ></suggested-ads-carousel>
+    <suggested-ads-carousel 
+    ad-id="1000"
+    class="blue"
+    src="http://localhost:8081/api/v1/mock"
+    title="Articulos Sugeridos"
+    currency="en-US"
+    ></suggested-ads-carousel>
+  <br>
+  <suggested-ads-carousel ad-id="1001" src="" title="Articulos Sugeridos"></suggested-ads-carousel>
+  <suggested-ads-carousel ad-id="1001" title="Articulos Sugeridos"></suggested-ads-carousel>
+
   <script>
     /** Set complex properties */
     // document.querySelector('suggested-ads-carousel').foo = ['bar'];

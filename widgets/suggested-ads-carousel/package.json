@@ -1,5 +1,5 @@
 {
-  "name": "suggested-ads-carousel",
+  "name": "@Yapo/suggested-ads-carousel",
   "version": "0.1.0",
   "description": "Generated Nutmeg Web Component",
   "main": "dist/suggested-ads-carousel.js",
