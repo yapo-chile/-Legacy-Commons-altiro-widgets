@@ -1,7 +1,7 @@
 import { Seed, Property, html, TemplateResult } from '@nutmeg/seed';
 import { SuggestedAd } from './suggested-ad';
 import { SuggestedService } from './SuggestedService';
-import { Ad , ResponseSuggestedAd} from './types';
+import { Ad } from './types';
 
 export class SuggestedAdsCarousel extends Seed {
   @Property() public adId: string = '';
@@ -41,7 +41,7 @@ export class SuggestedAdsCarousel extends Seed {
   /** Rerender when the observed attributes change. */
   public attributeChangedCallback(name: string, oldValue: any, newValue: any) {
     super.attributeChangedCallback(name, oldValue, newValue);
-    if (name === 'ad-id') {
+    if (name === 'ad-id' || name === 'src') {
       this.getSuggestedAds(newValue);
     }
     console.log('changed', name);
@@ -98,6 +98,10 @@ export class SuggestedAdsCarousel extends Seed {
           margin-right: 5px;
         }
         /* AD SCOPE */
+        .suggested-ad {
+          cursor: pointer;
+        }
+
         .suggested-ad__image {
           width: 100%;
           height: 100px;
