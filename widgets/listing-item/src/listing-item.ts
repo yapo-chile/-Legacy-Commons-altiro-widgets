@@ -34,8 +34,6 @@ export class ListingItem extends Seed {
     }
 
     this.price = this.price.replace(',00', '');
-
-    // this.listenWindowWith();
   }
 
   /** The component instance has been removed from the DOM. */
@@ -231,6 +229,14 @@ export class ListingItem extends Seed {
     return html`${el}`;
   }
 
+  private renderTitle(): TemplateResult {
+    let span = document.createElement('SPAN');
+
+    span.innerHTML = this.title;
+
+    return html`${span}`;
+  }
+
   /** HTML Template for the component. */
   public get template(): TemplateResult {
     return html`
@@ -245,7 +251,7 @@ export class ListingItem extends Seed {
         <div class="listingItem-info __mainColumn">
           <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
             ${this.renderElement(this.location, 'I', 'fal fa-map-marker-alt')}
-            <span> ${this.title} </span>
+            ${this.renderTitle()}
           </h2>
           <div class="listingItem-infoPrice __infoRow">${this.price}</div>
           <ul class="listingItem-infoAdParams __infoRow">
