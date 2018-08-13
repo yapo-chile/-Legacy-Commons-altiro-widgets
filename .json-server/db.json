@@ -1,0 +1,71 @@
+{
+  "suggested-ads": {
+    "ads": [{
+      "id": "1",
+      "title": "Anuncio 1 cypress",
+      "price": 1000.10,
+      "currency": "$",
+      "images": {
+        "full": "https://www.yapo.cl/img/home_yapo_logo.png",
+        "small": "https://images.pexels.com/photos/169203/pexels-photo-169203.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "medium": "https://www.yapo.cl/img/home_yapo_logo.png"
+      },
+      "url": "/vi/1000"
+    }, {
+      "id": "2",
+      "title": "Anuncio de yapo 2",
+      "price": 2000.23,
+      "currency": "$",
+      "images": {
+        "full": "https://www.yapo.cl/img/home_yapo_logo.png",
+        "small": "https://images.pexels.com/photos/803845/pexels-photo-803845.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "medium": "https://www.yapo.cl/img/home_yapo_logo.png"
+      },
+      "url": "www.google.cl"
+    }, {
+      "id": "3",
+      "title": "Anuncio de yapo 3",
+      "price": 3000.3,
+      "currency": "$",
+      "images": {
+        "full": "https://www.yapo.cl/img/home_yapo_logo.png",
+        "small": "https://images.pexels.com/photos/88832/pexels-photo-88832.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "medium": "https://www.yapo.cl/img/home_yapo_logo.png"
+      },
+      "url": "www.google.cl"
+    }, {
+      "id": "4",
+      "title": "Anuncio de yapo 4",
+      "price": 4000.4,
+      "currency": "$",
+      "images": {
+        "full": "https://www.yapo.cl/img/home_yapo_logo.png",
+        "small": "https://images.pexels.com/photos/161809/cityscape-manhattan-skyline-view-161809.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "medium": "https://www.yapo.cl/img/home_yapo_logo.png"
+      },
+      "url": "www.google.cl"
+    }, {
+      "id": "5",
+      "title": "Oso de Peluche",
+      "price": 5000.5,
+      "currency": "$",
+      "images": {
+        "full": "https://www.yapo.cl/img/home_yapo_logo.png",
+        "small": "https://images.pexels.com/photos/207891/pexels-photo-207891.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "medium": "https://www.yapo.cl/img/home_yapo_logo.png"
+      },
+      "url": "www.google.cl"
+    }, {
+      "id": "6",
+      "title": "Anuncio de yapo 6",
+      "price": 6000.6,
+      "currency": "$",
+      "images": {
+        "full": "https://www.yapo.cl/img/home_yapo_logo.png",
+        "small": "https://images.pexels.com/photos/815503/pexels-photo-815503.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "medium": "https://www.yapo.cl/img/home_yapo_logo.png"
+      },
+      "url": "www.google.cl"
+    }]
+  }
+}
