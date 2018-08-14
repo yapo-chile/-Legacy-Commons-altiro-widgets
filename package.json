@@ -5,37 +5,19 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "keywords": [
-    "suggested-ads-carousel",
-    "nutmeg"
-  ],
   "license": "MIT",
   "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:record": "cypress run --record",
-    "start": "json-server --watch .json-server/db.json --port 8089 --routes .json-server/routes.json --middlewares .json-server/middleware.js",
+    "json-server:start": "json-server --watch .json-server/db.json --port 8089 --routes .json-server/routes.json --middlewares .json-server/middleware.js",
     "test": "run-p --race start cy:run",
-    "cy:init": "run-p --race start cy:open",
-    "test:ci": "run-p --race start cy:run:record"
-  },
-  "dependencies": {
-    "@storybook/cli": "4.0.0-alpha.16",
-    "lit-html": "^0.10.2"
+    "cy:init": "run-p --race json-server:start cy:open",
+    "test:ci": "run-p --race json-server:start cy:run:record"
   },
   "devDependencies": {
-    "@nutmeg/seed": "0.12.1",
-    "@storybook/polymer": "^4.0.0-alpha.16",
-    "awesome-typescript-loader": "^5.2.0",
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0",
-    "cypress": "^3.0.3",
+    "cypress": "^3.1.0",
     "json-server": "^0.14.0",
-    "npm-run-all": "^4.1.3",
-    "polymer-webpack-loader": "^2.0.3",
-    "typescript": "^3.0.1",
-    "webpack": "^4.16.5"
+    "npm-run-all": "^4.1.3"
   }
 }
