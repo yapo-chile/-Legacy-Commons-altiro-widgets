@@ -38,7 +38,7 @@ export class AdParams implements IAdParams{
                 }
 
                 .listingItem-infoAdParam i {
-                    font-size: 11px;
+                    font-size: 13px;
                     align-self: center;
                 }
 
