@@ -47,7 +47,7 @@ context('SuggestedAds', () => {
         } else {
           return '';
         }
-      }).then( () => {
+      }).then(() => {
         cy.location('pathname').should('eq', url);
       });
     });
