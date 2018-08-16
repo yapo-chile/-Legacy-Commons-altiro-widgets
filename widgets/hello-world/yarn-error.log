@@ -1,0 +1,62 @@
+Arguments: 
+  /Users/claudio.donoso/.nvm/versions/node/v9.4.0/bin/node /usr/local/Cellar/yarn/1.9.4/libexec/bin/yarn.js install --mutex network:42424 --non-interactive
+
+PATH: 
+  /Users/claudio.donoso/Documents/repos-yapo/altiro-widgets/widgets/hello-world/node_modules/.bin:/Users/claudio.donoso/Documents/repos-yapo/altiro-widgets/widgets/node_modules/.bin:/Users/claudio.donoso/Documents/repos-yapo/altiro-widgets/node_modules/.bin:/Users/claudio.donoso/Documents/repos-yapo/node_modules/.bin:/Users/claudio.donoso/Documents/node_modules/.bin:/Users/claudio.donoso/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/Users/claudio.donoso/.nvm/versions/node/v9.4.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/claudio.donoso/.npm-packages/bin:/Users/claudio.donoso/.nvm/versions/node/v9.4.0/bin:/Users/claudio.donoso/Library/Android/sdk/tools:/Users/claudio.donoso/Library/Android/sdk/platform-tools:/Users/claudio.donoso/Library/Android/sdk/tools:/Users/claudio.donoso/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  9.4.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@Yapo%2fyapo-gallery: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:64202:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:137468:22)
+      at Request.emit (events.js:160:13)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138440:10)
+      at Request.emit (events.js:160:13)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138362:12)
+      at Object.onceWrapper (events.js:255:19)
+      at IncomingMessage.emit (events.js:165:20)
+      at endReadableNT (_stream_readable.js:1101:12)
+      at process._tickCallback (internal/process/next_tick.js:152:19)
+
+npm manifest: 
+  {
+  	"name": "hello-world",
+  	"version": "0.1.0",
+  	"description": "Generated Nutmeg Web Component",
+  	"main": "dist/hello-world.js",
+  	"module": "dist/hello-world.js",
+  	"unpkg": "dist/hello-world.min.js",
+  	"types": "dist/hello-world.d.ts",
+  	"directories": {
+  		"test": "test"
+  	},
+  	"engines": {
+  		"node": ">=8.0.0"
+  	},
+  	"keywords": [
+  		"hello-world",
+  		"nutmeg"
+  	],
+  	"license": "MIT",
+  	"dependencies": {
+  		"@nutmeg/seed": "0.12.1"
+  	},
+  	"devDependencies": {
+  		"@Yapo/yapo-gallery": "0.1.0",
+  		"@nutmeg/cli": "0.15.0"
+  	}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
