@@ -123,7 +123,7 @@ export class ListingItem extends Seed {
         .listingItem-infoTitle {
           font-size: 14px;
           font-weight: 100;
-          height: 34px;
+          height: 32px;
           line-height: normal;
           margin: 0;
           overflow: hidden;
