@@ -1,20 +1,20 @@
 class ByeWorld extends HTMLElement {
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
 
-  connectedCallback() {
-    this.render();
+  connectedCallback () {
+    this.render()
   }
 
-  render() {
-    let shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.innerHTML = this.template;
+  render () {
+    let shadowRoot = this.attachShadow({mode: 'open'})
+    shadowRoot.innerHTML = this.template
   }
 
-  get template() {
-    return `<h3>Un Sucio componente hijo</h3>`;
+  get template () {
+    return `<h3>Un Sucio componente hijo</h3>`
   }
 }
 
-customElements.define('bye-world', ByeWorld);
+customElements.define('bye-world', ByeWorld)
