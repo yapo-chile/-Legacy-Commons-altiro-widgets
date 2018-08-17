@@ -109,7 +109,7 @@ class ListingItem extends HTMLElement {
       <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
       <div id="ad-${this.adId}" class="listingItem-box">
         <div class="listingItem-image __mainColumn">
-          <span class="listingItem-imageLabel">${this.label}</span>
+          ${this.label ? `<span class="listingItem-imageLabel">${this.label}</span>` : ``}
           <img src="${this.url}" alt="${this.title}"/>
         </div>
 
