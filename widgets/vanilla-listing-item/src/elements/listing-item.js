@@ -9,7 +9,7 @@ class ListingItem extends HTMLElement {
     }
     this.price = this.price.replace(',00', '')
 
-    this.innerHTML = this.render()
+    this.initShadowDom()
   }
 
   render () {
@@ -97,25 +97,9 @@ class ListingItem extends HTMLElement {
     return this.getAttribute('is-favorite')
   }
 
-  renderElement (param, typeEl, classN, text) {
-    let el = document.createElement('' + typeEl + '')
-
-    if (param && param !== '') {
-      el.className = '' + classN + ''
-      if (text) {
-        el.innerHTML = '' + text + ''
-      }
-    }
-
-    return `${el}`
-  }
-
-  renderTitle () {
-    let span = document.createElement('SPAN')
-
-    span.innerHTML = this.title
-
-    return `${span}`
+  initShadowDom () {
+    let shadowRoot = this.attachShadow({mode: 'open'})
+    shadowRoot.innerHTML = this.render()
   }
 
   get template () {
@@ -132,10 +116,8 @@ class ListingItem extends HTMLElement {
             ${this.location ? `<i class="fal fa-map-marker-alt"></i>` : ``} 
             ${this.title ? `<span>${this.title}</span>` : ``}           
           </h2>
-          <div class="listingItem-infoPrice __infoRow">${this.price}</div>
-          <ul class="listingItem-infoAdParams __infoRow">
-            <ad-params params="${this.adParams}"></ad-params>
-          </ul>
+          <div class="listingItem-infoPrice __infoRow">${this.price}</div>          
+          <ad-params class="" params='${this.adParams}'></ad-params>          
           <div class="listingItem-infoBottom __infoRow">
             <div class="listingItem-infoBottomDate">${this.date}</div>
             <div class="listingItem-infoBottomType">${this.isPro}</div>
@@ -149,8 +131,8 @@ class ListingItem extends HTMLElement {
         </div>
 
         <div class="listingItem-infoIcons __mainColumn">
-          <div class="listingItem-infoLastTop">
-            ${this.renderElement(this.isFavorite, 'I', 'fal fal fa-heart')}
+          <div class="listingItem-infoLastTop">            
+            ${this.isFavorite ? `<i class="fal fa-heart"></i>` : ``}
           </div>
           <div class="listingItem-infoLastBottom __hidden">
             <i class="fal fa-question-circle"></i>
