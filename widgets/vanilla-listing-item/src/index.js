@@ -1,2 +1,2 @@
-import './elements/hello-world'
-import './elements/bye-world'
+import './elements/listing-item'
+import './elements/ad-params'
