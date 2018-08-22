@@ -32,7 +32,7 @@ class ListingItem extends HTMLElement {
     }
 
     get categoryName() {
-        return this.getAttribute('category');
+        return this.getAttribute('category-name');
     }
 
     get commune() {
@@ -76,7 +76,13 @@ class ListingItem extends HTMLElement {
     }
 
     get url() {
-        return this.getAttribute('url');
+      let urlSet = '/img/m_prod_default.png';
+      
+      if (this.getAttribute('url') !== '') {
+          urlSet = this.getAttribute('url');
+      }
+      
+      return urlSet;
     }
 
     set url(url) {
@@ -147,21 +153,11 @@ class ListingItem extends HTMLElement {
     get cssStyle(): string {
         return `
             <style>
-                :host {
+                .listingItem-box {
+                  background-color: var(--listing-item-background-color, #FFFFFF);
                   border-bottom: 2px solid #F8F8F8;
                   border-top: 2px solid #F8F8F8;
                   border-radius: 5px;
-                  margin: 0;
-                  padding: 0;
-                  width: 100%;
-                }
-        
-                * {
-                  font-family: Helvetica, Arial, sans-serif;
-                }
-        
-                .listingItem-box {
-                  background-color: var(--listing-item-background-color, #FFFFFF);
                   color: #000000;
                   display: flex;
                   flex-direction: row;
@@ -184,6 +180,22 @@ class ListingItem extends HTMLElement {
                   min-width: 122px;
                   max-width: 122px;
                   position: relative;
+                }
+
+                .listingItem-image::after {
+                  background: -moz-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+                  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(153,218,255,0)), color-stop(100%, rgba(0,0,0,1)));
+                  background: -webkit-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+                  background: -o-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+                  background: -ms-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+                  background: linear-gradient(180deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+                  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#000000',GradientType=0 );
+                  bottom: 0;
+                  content: '';
+                  height: 70px;
+                  opacity: 0.1;
+                  position: absolute;
+                  width: 100%;
                 }
         
                 .listingItem-image img {
@@ -214,9 +226,9 @@ class ListingItem extends HTMLElement {
         
                 .listingItem-infoTitle {
                   font-size: 14px;
-                  font-weight: 100;
-                  height: 32px;
-                  line-height: normal;
+                  font-weight: 500;
+                  height: 31px;
+                  line-height: 15px;
                   margin: 0;
                   overflow: hidden;
                 }
@@ -244,7 +256,9 @@ class ListingItem extends HTMLElement {
         
                 .listingItem-infoBottomDate {
                   align-self: flex-end;
-                  color: grey;
+                  color: #666666;
+                  font-size: 10px;
+                  font-weight: normal;
                   margin-right: 10px;
                 }
         
@@ -306,13 +320,13 @@ class ListingItem extends HTMLElement {
                 /* This rule only applies for Safari*/
                 @media not all and (min-resolution:.001dpcm) { 
                     @supports (-webkit-appearance:none) {
-                    
                         .listingItem-image img {                     
                             display:none;                                                
                         }
                         .listingItem-image {
                             background-image: url("${this.url}");
                             background-size: cover;
+                            background-position: center center;
                         }
                     }
                 }
