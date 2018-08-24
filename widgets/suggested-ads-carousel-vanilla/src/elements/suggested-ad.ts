@@ -1,4 +1,5 @@
-import { html, TemplateResult, render } from 'lit-html';
+import { html, render } from 'lit-html/lib/lit-extended';
+import { TemplateResult } from 'lit-html';
 import { Ad } from './types';
 
 export class SuggestedAd extends HTMLElement {
@@ -20,19 +21,6 @@ export class SuggestedAd extends HTMLElement {
     if (typeof link !== 'undefined') {
       window.location.assign(link);
     }
-  }
-  private respondToVisibility(element: HTMLElement, callback: Function): void {
-    var options = {
-      root: document.documentElement
-    }
-  
-    var observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        callback(entry.intersectionRatio > 0);
-      });
-    }, options);
-  
-    observer.observe(element);
   }
 
   private formatPrice(number?: number, currency?: string) : string {
@@ -56,13 +44,13 @@ export class SuggestedAd extends HTMLElement {
   get template(): TemplateResult {
     if (this.ad) {
       return html`
-        <div class="suggested-ad" on-ready="${console.log('carousel inject')}" on-click="${() => this.redirect(this.ad.url)}">
+        <div class="suggested-ad" on-ready="${console.log('carousel inject')}" on-click=${() => this.redirect(this.ad.url)}>
           <div class="suggested-ad__image"><img src="${(this.ad.images) ? this.ad.images.full : ''}" /></div>
           <div class="suggested-ad__price">
             <span>${this.formatPrice(this.ad.price, this.ad.currency)}</span>
           </div>
           <div class="suggested-ad__title" title="${this.ad.title}">
-            <span>${this.ad.title}</span>
+            <p>${this.ad.title}</p>
           </div>
         </div>
       `;
@@ -73,40 +61,57 @@ export class SuggestedAd extends HTMLElement {
   get cssStyle(): TemplateResult {
     return html`
       <style>
-        /* AD SCOPE */
         .suggested-ad {
-          cursor: pointer;
-        }
+        cursor: pointer;
+      }
+      .suggested-ad__image {
+        width: 100%;
+        height: 120px;
+      }
+
+      .suggested-ad__image img {
+        object-fit: cover;
+        border-radius: 3px;
+        height: 120px;
+        width: 100%;
+      }
+
+      .suggested-ad__title {
+        margin-top: 0;
+        max-height: 32px;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .suggested-ad__price {
+        width: 100%;
+        margin-top: 7px;
+      }
+
+      .suggested-ad__price span {
+        color: #111111;
+        font-size: 16px;
+        font-weight: normal;
+      }
+
+      .suggested-ad__title p {
+        color: #666666;
+        font-size: 12px;
+        line-height: 1.17;
+        margin: 3px 0 0 0;
+        white-space: normal;
+      }
+
+      @media (min-width: 400px) {
         .suggested-ad__image {
           width: 100%;
           height: 140px;
         }
+
         .suggested-ad__image img {
-          object-fit: cover;
-          border-radius: 3px;
           height: 140px;
-          width: 100%;
         }
-        .suggested-ad__title {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          margin-top: 0px;
-          width: 100%;
-        }
-        .suggested-ad__title span {
-          font-size: 12px;
-          color: #666666;
-        }
-        .suggested-ad__price {
-          width: 100%;
-          margin-top: 3px;
-        }
-        .suggested-ad__price span {
-          color: #111111;
-          font-size: 16px;
-          font-weight: bold;
-        }
+      }
       </style>
     `;
   }

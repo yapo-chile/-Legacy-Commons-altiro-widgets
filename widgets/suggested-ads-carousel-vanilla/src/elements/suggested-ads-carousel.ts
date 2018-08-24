@@ -28,7 +28,7 @@ class SuggestedAdsCarousel extends HTMLElement {
       }
     }
 
-    public render() {
+    public render() : TemplateResult {
       return html`${this.template}
               ${this.cssStyle}
               `;
@@ -56,11 +56,15 @@ class SuggestedAdsCarousel extends HTMLElement {
 
     get ads() : Array<Ad>{
       const strAds = this.getAttribute('ads');
-      return JSON.parse(strAds);
+      try {
+        return JSON.parse(strAds);
+      } catch {
+        return [];
+      }
+      
     }
 
     public refresh() {
-      console.log(this.render());
       render(this.render(), this.shadowRoot);
     }
 
@@ -90,8 +94,8 @@ class SuggestedAdsCarousel extends HTMLElement {
     }
 
     get cssStyle(): TemplateResult {
-        return html`
-        <style lang="postcss">
+      return html`
+      <style lang="postcss">
         :host {
           background-color: var(--background-color, #FFFFFF);
         }
@@ -105,24 +109,33 @@ class SuggestedAdsCarousel extends HTMLElement {
         .suggested-ads__carousel {
             color: #000000;
             display: inline-flex;
-            max-width: 800px;
             overflow-x: auto;
             overflow-y: hidden;
             padding: 1px;
             width: 100%;
-            white-space: nowrap;
             -webkit-overflow-scrolling: touch;
         }
+
         .suggested-ads__title {
-          font-size: 17px;
-          font-weight: bold;
-          margin: 5px 0;
+          color: #111111;
+          font-size: 16px;
+          font-weight: normal;
+          margin-bottom: 12px;
+          margin-top: 0;
         }
+
         .suggested-ads__ad {
-          min-width: 140px;
-          max-width: 140px;
+          min-width: 120px;
+          max-width: 120px;
           margin-right: 8px;
         }
+
+        @media (min-width: 400px) {
+          .suggested-ads__ad {
+            min-width: 140px;
+            max-width: 140px;
+          }
+        }  
       </style>
     `;
     }
