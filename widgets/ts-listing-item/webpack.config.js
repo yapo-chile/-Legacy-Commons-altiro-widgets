@@ -2,13 +2,14 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    'listing-item': './src/index.ts'
+  },
   devtool: 'inline-source-map',
   module: {
     rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+      { test: /\.ts(x?)$/, 
+        loader: "ts-loader",
         exclude: /node_modules/,
       },
       {
@@ -26,7 +27,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: 'listing-item.bundled.js',
+    filename: '[name].bundled.js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [

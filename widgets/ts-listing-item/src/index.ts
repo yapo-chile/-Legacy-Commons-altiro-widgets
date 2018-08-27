@@ -1,2 +1,2 @@
-import './elements/listing-item'
-import './elements/ad-params'
+import './elements/ad-params';
+import './elements/listing-item';
