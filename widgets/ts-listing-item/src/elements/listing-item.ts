@@ -63,6 +63,10 @@ class ListingItem extends HTMLElement {
         this.setAttribute('price', price);
     }
 
+    get priceLowered() {
+      return this.getAttribute('price-lowered');
+    }
+
     get region() {
         return this.getAttribute('region');
     }
@@ -124,7 +128,10 @@ class ListingItem extends HTMLElement {
             ${this.location ? `<i class="fal fa-map-marker-alt"></i>` : ``}
             ${this.title ? `<span>${this.title}</span>` : ``}
           </h2>
-          <div class="listingItem-infoPrice __infoRow">${this.price}</div>
+          <div class="listingItem-infoPrice __infoRow">
+          ${this.priceLowered === '1' ? `<i class="fal fa-arrow-to-bottom"></i>` : ``}
+            ${this.price}
+          </div>
           <ad-params class="" params='${this.adParams}'></ad-params>
           <div class="listingItem-infoBottom __infoRow">
             <div class="listingItem-infoBottomDate">${this.date}</div>
@@ -236,6 +243,11 @@ class ListingItem extends HTMLElement {
                 .listingItem-infoPrice {
                   font-size: 18px;
                   font-weight: bold;
+                }
+
+                .listingItem-infoPrice .fa-arrow-to-bottom {
+                  color: #52c300;
+                  margin-right: 5px;
                 }
         
                 .listingItem-infoAdParams {
