@@ -3,13 +3,13 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'listing-item': './src/index.ts'
+    'listing-item': ["@babel/polyfill", './src/index.ts']
   },
-  devtool: 'inline-source-map',
+  devtool: 'hidden-source-map',
   module: {
     rules: [
       { test: /\.ts(x?)$/, 
-        loader: "ts-loader",
+        loader: ['babel-loader', 'ts-loader'],
         exclude: /node_modules/,
       },
       {
