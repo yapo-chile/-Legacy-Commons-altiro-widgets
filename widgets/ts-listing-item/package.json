@@ -1,6 +1,6 @@
 {
   "name": "vanilla-listing-item",
-  "version": "0.0.1",
+  "version": "1.1.4",
   "main": "index.js",
   "author": "Danilo Velasquez <danilo.velasquez@schibsted.cl>",
   "license": "MIT",
@@ -10,8 +10,8 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "dependencies": {
-    "webpack-cli": "^3.1.0",
+    "shared-dependencies": "^1.1.4",
     "tslint": "^5.11.0",
-    "shared-dependencies": "1.0.0"
+    "webpack-cli": "^3.1.0"
   }
 }
