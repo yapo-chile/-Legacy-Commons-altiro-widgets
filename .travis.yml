@@ -1,0 +1,33 @@
+sudo: false
+os: trusty
+language: node_js
+node_js: '8'
+dist: trusty
+cache:
+  directories:
+    - ~/.nvm
+    - ~/.yarn
+    - node_modules
+
+before_install:
+  - echo -e "[url \"https://$CI_USER_TOKEN@github.schibsted.io\"]\n  insteadOf = ssh://git@github.schibsted.io" >> ~/.gitconfig
+
+script:
+  - yarn
+  - yarn lerna:lint
+  - yarn run lerna:unit
+  - yarn run lerna:build
+
+after_success:
+  - reports-publisher
+  - echo "$TRAVIS_BRANCH"
+  - echo "$TRAVIS_TAG"
+  - echo "$TRAVIS_PULL_REQUEST"
+  - if [[ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then bash bump_storybook.sh; fi
+
+after_failure: 
+  - reports-publisher
+
+notifications:
+  webhooks:
+    - https://devhose.spt-engprod-pro.schibsted.io/devhose/travis
