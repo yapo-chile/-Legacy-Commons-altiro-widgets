@@ -1,0 +1,6 @@
+qualityGate:
+  coverage:
+      acceptedDeltaPercentage: 8
+      enabled: false
+  codeAnalysis:
+      enabled: false

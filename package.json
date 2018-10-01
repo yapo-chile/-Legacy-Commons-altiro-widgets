@@ -5,19 +5,39 @@
   "engines": {
     "node": ">=8.0.0"
   },
+  "private": true,
+  "workspaces": [
+    "widgets/*"
+  ],
   "license": "MIT",
   "scripts": {
+    "cy:init": "run-p --race json-server:start cy:open",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:record": "cypress run --record",
     "json-server:start": "json-server --watch .json-server/db.json --port 8089 --routes .json-server/routes.json --middlewares .json-server/middleware.js",
+    "lerna:build": "lerna run build",
+    "lerna:install": "lerna run install",
+    "lerna:lint": "lerna run lint",
+    "lerna:updated": "lerna updated",
+    "lerna:unit": "lerna run unit",
+    "lerna:bootstrap": "lerna bootstrap",
+    "lerna:publish": "lerna publish --registry=https://artifacts.schibsted.io/artifactory/api/npm/npm-virtual",
+    "storybook": "yarn run lerna:build && start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "test": "run-p --race start cy:run",
-    "cy:init": "run-p --race json-server:start cy:open",
     "test:ci": "run-p --race json-server:start cy:run:record"
   },
   "devDependencies": {
+    "@storybook/addon-options": "^3.4.11",
+    "@storybook/addon-viewport": "^3.4.11",
+    "@storybook/cli": "^3.4.11",
+    "@storybook/html": "^4.0.0-alpha.16",
+    "storybook-readme": "^4.0.0-beta1",
     "cypress": "^3.1.0",
-    "json-server": "^0.14.0",
-    "npm-run-all": "^4.1.3"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "lerna": "^3.4.0",
+    "lerna-wizard": "^1.0.9"
   }
 }
