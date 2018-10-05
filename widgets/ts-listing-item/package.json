@@ -1,5 +1,5 @@
 {
-  "name": "vanilla-listing-item",
+  "name": "ts-listing-item",
   "version": "0.0.1",
   "main": "index.js",
   "author": "Danilo Velasquez <danilo.velasquez@schibsted.cl>",
@@ -12,9 +12,9 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
     "babel-plugin-transform-custom-element-classes": "^0.1.0",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "document-register-element": "1.8.1",
     "html-loader": "^0.5.5",
@@ -27,6 +27,6 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0"
+    "@polymer/lit-element": "^0.6.1"
   }
 }

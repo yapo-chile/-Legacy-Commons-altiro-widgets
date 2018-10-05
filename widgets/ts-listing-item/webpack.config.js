@@ -1,15 +1,15 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
   entry: {
-    'listing-item': ["@babel/polyfill", './src/index.ts']
+    'listing-item': ['./src/index.ts']
   },
   devtool: 'hidden-source-map',
   module: {
     rules: [
-      { test: /\.ts(x?)$/, 
-        loader: ['babel-loader', 'ts-loader'],
+      { test: /\.ts(x?)$/,
+        loader: ['ts-loader'],
         exclude: /node_modules/,
       },
       {
@@ -24,7 +24,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.css'],
   },
   output: {
     filename: '[name].bundled.js',
@@ -36,4 +36,4 @@ module.exports = {
       filename: './index.html',
     }),
   ],
-}
+};
