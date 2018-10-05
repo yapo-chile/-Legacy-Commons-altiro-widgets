@@ -34,12 +34,10 @@ class ListingItem extends LitElement {
   private _lazyLoading():void {
     document.addEventListener("DOMContentLoaded", function() {
       // @ts-ignore
-      var webcomponents = document.querySelectorAll("listing-item");
+      let webcomponents = document.querySelectorAll("listing-item");
       let active = false;
       webcomponents.forEach((webcomponent) => {
-        // console.log(webcomponent);
-        var lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll("img.lazy"));
-
+        let lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll("img.lazy"));
         if ("IntersectionObserver" in window) {
           let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
             entries.forEach(function(entry) {
