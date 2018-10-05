@@ -35,6 +35,7 @@ class ListingItem extends LitElement {
     document.addEventListener("DOMContentLoaded", function() {
       // @ts-ignore
       var webcomponents = document.querySelectorAll("listing-item");
+      let active = false;
       webcomponents.forEach((webcomponent) => {
         // console.log(webcomponent);
         var lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll("img.lazy"));
@@ -60,6 +61,37 @@ class ListingItem extends LitElement {
           });
         } else {
           // Possibly fall back to a more compatible method here
+          const lazyLoad = function() {
+            if (active === false) {
+              active = true;
+
+              setTimeout(function() {
+                lazyImages.forEach(function(lazyImage: any) {
+                  if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.srcset = lazyImage.dataset.srcset;
+                    lazyImage.classList.remove("lazy");
+
+                    lazyImages = lazyImages.filter(function(image: any) {
+                      return image !== lazyImage;
+                    });
+
+                    if (lazyImages.length === 0) {
+                      document.removeEventListener("scroll", lazyLoad);
+                      window.removeEventListener("resize", lazyLoad);
+                      window.removeEventListener("orientationchange", lazyLoad);
+                    }
+                  }
+                });
+
+                active = false;
+              }, 200);
+            }
+          };
+
+          document.addEventListener("scroll", lazyLoad);
+          window.addEventListener("resize", lazyLoad);
+          window.addEventListener("orientationchange", lazyLoad);
         }
       });
     });
