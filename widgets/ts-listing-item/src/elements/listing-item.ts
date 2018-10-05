@@ -1,135 +1,87 @@
-/* tslint:disable:max-line-length no-trailing-whitespace */
-class ListingItem extends HTMLElement {
-    constructor() {
-        super();
-    }
+import {LitElement, html, property} from '@polymer/lit-element';
+import {TemplateResult} from 'lit-html/lit-html';
+import css from './listing-item.css';
 
-    public connectedCallback() {
-        if (this.isThumb === '1') {
-            this.url = this.url.replace('thumb', 'image');
+class ListingItem extends LitElement {
+
+  @property() isThumb: string;
+  @property() url: string = 'https://m.yapo.cl/img/m_prod_default.png';
+  @property() price: string;
+  @property() adId: string;
+  @property() label: string;
+  @property() location: string;
+  @property() priceLowered: string;
+  @property() adParams: string = '{}';
+  @property() date: string;
+  @property() isPro: string;
+  @property() isFavorite: string;
+  @property() region: string;
+  @property() commune: string;
+  @property() category: string;
+
+  constructor() {
+    super();
+  }
+
+  public connectedCallback(): void {
+    this._lazyLoading();
+    if (this.isThumb === '1') {
+      this.url = this.url.replace('thumb', 'image');
+    }
+    this.price = this.price.replace(',00', '');
+  }
+
+  private _lazyLoading():void {
+    document.addEventListener("DOMContentLoaded", function() {
+      // @ts-ignore
+      var webcomponents = document.querySelectorAll("listing-item");
+      webcomponents.forEach((webcomponent) => {
+        // console.log(webcomponent);
+        var lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll("img.lazy"));
+
+        if ("IntersectionObserver" in window) {
+          let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                let lazyImage = entry.target;
+                // @ts-ignore
+                lazyImage.src = lazyImage.dataset.src;
+                // @ts-ignore
+                // lazyImage.srcset = lazyImage.dataset.srcset;
+                // @ts-ignore
+                lazyImage.classList.remove("lazy");
+                lazyImageObserver.unobserve(lazyImage);
+              }
+            });
+          });
+          // @ts-ignore
+          lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+          });
+        } else {
+          // Possibly fall back to a more compatible method here
         }
-        this.price = this.price.replace(',00', '');
+      });
+    });
+  }
 
-        this.initShadowDom();
-    }
 
-    public render() {
-        return `${this.template}
-                ${this.cssStyle}
-                `;
-    }
-
-    get adId() {
-        return this.getAttribute('ad-id');
-    }
-
-    get adParams() {
-        return this.getAttribute('ad-params');
-    }
-
-    get category() {
-        return this.getAttribute('category');
-    }
-
-    get categoryName() {
-        return this.getAttribute('category-name');
-    }
-
-    get commune() {
-        return this.getAttribute('commune');
-    }
-
-    get currency() {
-        return this.getAttribute('currency');
-    }
-
-    get date() {
-        return this.getAttribute('date');
-    }
-
-    get image() {
-        return this.getAttribute('image');
-    }
-
-    get isPro() {
-        return this.getAttribute('is-pro');
-    }
-
-    get price() {
-        return this.getAttribute('price');
-    }
-
-    set price(price) {
-        this.setAttribute('price', price);
-    }
-
-    get priceLowered() {
-      return this.getAttribute('price-lowered');
-    }
-
-    get region() {
-        return this.getAttribute('region');
-    }
-
-    get subCategory() {
-        return this.getAttribute('sub-category');
-    }
-
-    get title() {
-        return this.getAttribute('title');
-    }
-
-    get url() {
-      let urlSet = '/img/m_prod_default.png';
-      
-      if (this.getAttribute('url') !== '') {
-          urlSet = this.getAttribute('url');
-      }
-      
-      return urlSet;
-    }
-
-    set url(url) {
-        this.setAttribute('url', url);
-    }
-
-    get label() {
-        return this.getAttribute('label');
-    }
-
-    get location() {
-        return this.getAttribute('location');
-    }
-
-    get isThumb() {
-        return this.getAttribute('is-thumb');
-    }
-
-    get isFavorite() {
-        return this.getAttribute('is-favorite');
-    }
-
-    public initShadowDom() {
-        const shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.innerHTML = this.render();
-    }
-
-    get template(): string {
-        return `
+  public render(): TemplateResult {
+    return html`
+      ${css(this.url)}
       <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
-      <div id="ad-${this.adId}" class="listingItem-box">
+      <section id="ad-${this.adId}" class="listingItem-box">
         <div class="listingItem-image __mainColumn">
-          ${this.label ? `<span class="listingItem-imageLabel">${this.label}</span>` : ``}
-          <img src="${this.url}" alt="${this.title}"/>
+          ${this.label && html`<span class="listingItem-imageLabel">${this.label}</span>`}
+          <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${this.url}" alt="${this.title}"/>
         </div>
-
         <div class="listingItem-info __mainColumn">
           <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
-            ${this.location ? `<i class="fal fa-map-marker-alt"></i>` : ``}
-            ${this.title ? `<span>${this.title}</span>` : ``}
+            ${this.location && html`<i class="fal fa-map-marker-alt"></i>`}
+            ${this.title && html`<span>${this.title}</span>`}
           </h2>
           <div class="listingItem-infoPrice __infoRow">
-          ${this.priceLowered === '1' ? `<i class="fal fa-arrow-to-bottom"></i>` : ``}
+          ${this.priceLowered === '1' ? html`<i class="fal fa-arrow-to-bottom"></i>` : ``}
             ${this.price}
           </div>
           <ad-params class="" params='${this.adParams}'></ad-params>
@@ -142,209 +94,20 @@ class ListingItem extends HTMLElement {
         <div class="listingItem-infoLocation">
           <div class="listingItem-infoLocationRegion __locationRow">${this.region}</div>
           <div class="listingItem-infoLocationCommune __locationRow">${this.commune}</div>
-          <div class="listingItem-infoLocationCategory __locationRow">${this.categoryName}</div>
+          <div class="listingItem-infoLocationCategory __locationRow">${this.category}</div>
         </div>
 
         <div class="listingItem-infoIcons __mainColumn">
           <div class="listingItem-infoLastTop">
-            ${this.isFavorite ? `<i class="fal fa-heart"></i>` : ``}
+            ${this.isFavorite && html`<i class="fal fa-heart"></i>`}
           </div>
           <div class="listingItem-infoLastBottom __hidden">
             <i class="fal fa-question-circle"></i>
           </div>
         </div>
-      </div>
+      </section>
     `;
-    }
-
-    get cssStyle(): string {
-        return `
-            <style>
-                .listingItem-box {
-                  background-color: var(--listing-item-background-color, #FFFFFF);
-                  border-bottom: 2px solid #F8F8F8;
-                  border-top: 2px solid #F8F8F8;
-                  border-radius: 5px;
-                  color: #000000;
-                  display: flex;
-                  flex-direction: row;
-                  flex-wrap: nowrap;
-                  justify-content: space-between;
-                  height: 140px;
-                  width: 100%;
-                }
-        
-                .listingItem-box .__mainColumn{
-                  display: flex;
-                  flex-direction: column;
-                }
-        
-                .listingItem-box .__hidden{
-                  display: none;
-                }
-        
-                .listingItem-image {
-                  min-width: 122px;
-                  max-width: 122px;
-                  position: relative;
-                }
-
-                .listingItem-image::after {
-                  background: -moz-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
-                  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(153,218,255,0)), color-stop(100%, rgba(0,0,0,1)));
-                  background: -webkit-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
-                  background: -o-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
-                  background: -ms-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
-                  background: linear-gradient(180deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
-                  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#000000',GradientType=0 );
-                  bottom: 0;
-                  content: '';
-                  height: 70px;
-                  opacity: 0.1;
-                  position: absolute;
-                  width: 100%;
-                }
-        
-                .listingItem-image img {
-                  height: 100%;
-                  object-fit: cover;
-                  object-position: 50% 50%;
-                }
-        
-                .listingItem-imageLabel {
-                  background-color: #5f259f;
-                  border-radius: 5px;
-                  color: #FFFFFF;
-                  font-size: 10px;
-                  left: 5%;
-                  padding: 5px;
-                  position: absolute;
-                  top: 5%;
-                }
-        
-                .listingItem-info {
-                  flex-grow: 1;
-                  justify-content: space-between;
-                  padding: 10px;
-                  padding-top: 19px;
-                  padding-right: 0;
-                  max-width: 85%;
-                }
-        
-                .listingItem-infoTitle {
-                  font-size: 14px;
-                  font-weight: 500;
-                  height: 31px;
-                  line-height: 15px;
-                  margin: 0;
-                  overflow: hidden;
-                }
-        
-                .listingItem-infoPrice {
-                  font-size: 18px;
-                  font-weight: bold;
-                }
-
-                .listingItem-infoPrice .fa-arrow-to-bottom {
-                  color: #52c300;
-                  margin-right: 5px;
-                }
-        
-                .listingItem-infoAdParams {
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: flex-start;
-                  list-style-type: none;
-                  margin: 0;
-                  padding: 0;
-                }
-        
-                .listingItem-infoBottom {
-                  font-size: 10px;
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: space-between;
-                }
-        
-                .listingItem-infoBottomDate {
-                  align-self: flex-end;
-                  color: #666666;
-                  font-size: 10px;
-                  font-weight: normal;
-                  margin-right: 10px;
-                }
-        
-                .listingItem-infoBottomType {
-                  align-self: flex-end;
-                  color: #4376b0;
-                  font-size: 9px;
-                  text-transform: uppercase;
-                  justify-content: center;
-                }
-        
-                .listingItem-infoIcons {
-                  font-size: 22px;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: space-between;
-                  padding: 10px 3px;
-                  min-width: 20px;
-                  max-width: 20px;
-                }
-        
-                .listingItem-infoLocation {
-                  flex-grow: 1;
-                  font-size: 13px;
-                  font-weight: 100;
-                  display: none;
-                  flex-direction: column;
-                  padding-left: 30px;
-                  justify-content: center;
-                  width: 35%;
-                }
-        
-                .listingItem-infoLocation .__locationRow {
-                  margin-bottom: 10px;
-                }
-        
-                .listingItem-infoLocation .__locationRow:last-child {
-                  margin-bottom: 0;
-                }
-        
-                .listingItem-infoLastBottom {
-                  color: #4376b0;
-                }
-        
-                @media (min-width: 700px) {
-                  .listingItem-info {
-                    min-width: 45%;
-                    max-width: 45%;
-                  }
-        
-                  .listingItem-infoBottom {
-                    justify-content: flex-start;
-                  }
-        
-                  .listingItem-infoLocation {
-                    display: flex;
-                  }
-                }
-                /* This rule only applies for Safari*/
-                @media not all and (min-resolution:.001dpcm) { 
-                    @supports (-webkit-appearance:none) {
-                        .listingItem-image img {                     
-                            display:none;                                                
-                        }
-                        .listingItem-image {
-                            background-image: url("${this.url}");
-                            background-size: cover;
-                            background-position: center center;
-                        }
-                    }
-                }
-              </style>
-    `;
-    }
+  }
 }
 
 window.customElements.define('listing-item', ListingItem);
