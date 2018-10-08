@@ -24,11 +24,11 @@ class ListingItem extends LitElement {
   }
 
   public connectedCallback(): void {
-    this._lazyLoading();
     if (this.isThumb === '1') {
       this.url = this.url.replace('thumb', 'image');
     }
     this.price = this.price.replace(',00', '');
+    this._lazyLoading();
   }
 
   private _lazyLoading():void {
@@ -67,7 +67,6 @@ class ListingItem extends LitElement {
                 lazyImages.forEach(function(lazyImage: any) {
                   if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
                     lazyImage.src = lazyImage.dataset.src;
-                    lazyImage.srcset = lazyImage.dataset.srcset;
                     lazyImage.classList.remove("lazy");
 
                     lazyImages = lazyImages.filter(function(image: any) {
