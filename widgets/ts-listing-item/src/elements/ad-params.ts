@@ -1,85 +1,97 @@
 export class AdParams extends HTMLElement {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    public connectedCallback() {
-        this.initShadowDom();
-    }
+  public connectedCallback() {
+    this.initShadowDom();
+  }
 
-    public render() {
-        return `
+  public render() {
+    return `
             ${this.template}
             ${this.cssStyle}`;
+  }
+
+  public initShadowDom() {
+    const shadowRoot = this.attachShadow({mode: 'open'});
+    shadowRoot.innerHTML = this.render();
+  }
+
+  get adParams() {
+    const adParams = this.getAttribute('params');
+    let parsedParams;
+    try {
+      parsedParams = JSON.parse(adParams);
+      return parsedParams;
+    } catch (e) {
+      /* tslint:disable:no-console */
+      console.error('Invalid Ad Parameters', e);
+      return {};
+    }
+  }
+
+  public renderParam(type: string, data: string): string {
+    let icon = '';
+    const text = data.replace(/m2/g, 'm' + '<sup>2</sup>');
+
+    switch (type) {
+      case 'rooms': {
+        icon = 'fal fa-bed';
+        break;
+      }
+      case 'bathrooms': {
+        icon = 'fal fa-bath';
+        break;
+      }
+
+      case 'capacity': {
+        icon = 'fal fa-users';
+        break;
+      }
+
+      case 'surface': {
+        icon = 'fal fa-expand';
+        break;
+      }
+      case 'regdate': {
+        icon = 'fal fa-calendar-alt';
+        break;
+      }
+      case 'mileage': {
+        icon = 'fal fa-tachometer';
+        break;
+      }
+      case 'gearbox': {
+        icon = 'fal fa-cogs';
+        break;
+      }
     }
 
-    public initShadowDom() {
-        const shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.innerHTML = this.render();
-    }
-
-    get adParams() {
-        const adParams = this.getAttribute('params');
-        let parsedParams;
-        try {
-            parsedParams = JSON.parse(adParams);
-            return parsedParams;
-        } catch (e) {
-            /* tslint:disable:no-console */
-            console.error('Invalid Ad Parameters', e);
-            return {};
-        }
-    }
-
-    public renderParam(type: string, data: string): string {
-        let icon = '';
-        const text = data.replace(/m2/g, 'm' + '<sup>2</sup>');
-
-        switch (type) {
-            case 'rooms': {
-                icon = 'fal fa-bed';
-                break;
-            }
-            case 'bathrooms': {
-                icon = 'fal fa-bath';
-                break;
-            }
-
-            case 'capacity': {
-                icon = 'fal fa-users';
-                break;
-            }
-
-            case 'surface': {
-                icon = 'fal fa-expand';
-                break;
-            }
-        }
-
-        return `
+    return `
             <li class="listingItem-infoAdParam">
                 <i class="${icon}"></i>
                 <span>${text}</span>
             </li>
         `;
-    }
+  }
 
-    get template(): string {
-        const params = this.adParams;
-        let template = ``;
-        if (params) {
-            Object.keys(params).forEach((element) => {
-                if (params[element] !== '') {
-                    template += this.renderParam(element, params[element]);
-                }
-            });
+  get template(): string {
+    const params = this.adParams;
+    let template = ``;
+    if (params) {
+      Object.keys(params).forEach((element) => {
+        if (params[element] !== '') {
+          template += this.renderParam(element, params[element]);
         }
-        return `<ul class="listingItem-infoAdParams">${template}</ul>`;
+      });
     }
+    return `<ul class="listingItem-infoAdParams">${template}</ul>`;
+  }
 
-    get cssStyle(): string {
-        /* tslint:disable:max-line-length */
-        return `
+  get cssStyle(): string {
+    /* tslint:disable:max-line-length */
+    return `
             <style>
                 .listingItem-infoAdParams {
                   display: flex;
@@ -117,7 +129,7 @@ export class AdParams extends HTMLElement {
             </style>
             <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
         `;
-    }
+  }
 }
 
 window.customElements.define('ad-params', AdParams);

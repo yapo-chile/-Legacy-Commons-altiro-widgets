@@ -33,11 +33,11 @@
     "@storybook/addon-viewport": "^3.4.11",
     "@storybook/cli": "^3.4.11",
     "@storybook/html": "^4.0.0-alpha.16",
-    "storybook-readme": "^4.0.0-beta1",
     "cypress": "^3.1.0",
+    "lerna": "^3.4.1",
+    "lerna-wizard": "^1.0.9",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "lerna": "^3.4.0",
-    "lerna-wizard": "^1.0.9"
+    "storybook-readme": "^4.0.0-beta1"
   }
 }
