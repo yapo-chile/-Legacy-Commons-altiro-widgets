@@ -1,5 +1,5 @@
 {
-  "name": "@altiro-widgets/listing-item",
+  "name": "@altiro-widget/listing-item",
   "version": "2.0.0-alpha.1",
   "main": "index.js",
   "author": "Danilo Velasquez <danilo.velasquez@schibsted.cl>",

@@ -1,5 +1,5 @@
 {
-  "name": "@Yapo/altiro-widget",
+  "name": "@altiro-widget/root",
   "version": "0.1.0",
   "description": "Container of Web Component",
   "engines": {
