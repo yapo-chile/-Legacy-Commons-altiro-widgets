@@ -22,7 +22,7 @@
     "lerna:updated": "lerna updated",
     "lerna:unit": "lerna run unit",
     "lerna:bootstrap": "lerna bootstrap",
-    "lerna:publish": "lerna publish --registry=https://artifacts.schibsted.io/artifactory/api/npm/npm-virtual",
+    "lerna:publish": "yarn run lerna:build && lerna publish --registry=https://artifacts.schibsted.io/artifactory/api/npm/npm-virtual",
     "storybook": "yarn run lerna:build && start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "run-p --race start cy:run",
