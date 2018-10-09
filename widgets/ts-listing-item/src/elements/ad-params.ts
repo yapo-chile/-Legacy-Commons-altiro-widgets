@@ -1,10 +1,10 @@
-import { LitElement, html, property } from '@polymer/lit-element';
+import { html, LitElement, property } from '@polymer/lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { TemplateResult } from 'lit-html/lit-html';
 
 export class AdParams extends LitElement {
 
-  @property() params: string;
+  @property() public params: string;
   public objectParam: any;
 
   constructor() {
@@ -58,7 +58,7 @@ export class AdParams extends LitElement {
         `;
   }
 
-  render(): TemplateResult{
+  public render(): TemplateResult {
     return html`
     <style>
       .listingItem-infoAdParams {
@@ -94,15 +94,15 @@ export class AdParams extends LitElement {
       .listingItem-infoAdParam:last-child {
           margin-right: 0;
       }
-      
-      
+
+
     </style>
-     <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">       
+     <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
     <ul class="listingItem-infoAdParams">
         ${Object.keys(this.objectParam).map((element) => {
       return this.objectParam[element] !== '' ? this.renderParam(element, this.objectParam[element]) : '';
     })}
-    </ul>`
+    </ul>`;
   }
 }
 

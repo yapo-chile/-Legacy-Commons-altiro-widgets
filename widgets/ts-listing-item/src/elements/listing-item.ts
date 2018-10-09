@@ -1,23 +1,23 @@
-import {LitElement, html, property} from '@polymer/lit-element';
+import {html, LitElement, property} from '@polymer/lit-element';
 import {TemplateResult} from 'lit-html/lit-html';
 import css from './listing-item.css';
 
 class ListingItem extends LitElement {
 
-  @property() isThumb: string;
-  @property() url: string = 'https://m.yapo.cl/img/m_prod_default.png';
-  @property() price: string;
-  @property() adId: string;
-  @property() label: string;
-  @property() location: string;
-  @property() priceLowered: string;
-  @property() adParams: string = '{}';
-  @property() date: string;
-  @property() isPro: string;
-  @property() isFavorite: string;
-  @property() region: string;
-  @property() commune: string;
-  @property() category: string;
+  @property() public isThumb: string;
+  @property() public url: string = 'https://m.yapo.cl/img/m_prod_default.png';
+  @property() public price: string;
+  @property() public adId: string;
+  @property() public label: string;
+  @property() public location: string;
+  @property() public priceLowered: string;
+  @property() public adParams: string = '{}';
+  @property() public date: string;
+  @property() public isPro: string;
+  @property() public isFavorite: string;
+  @property() public region: string;
+  @property() public commune: string;
+  @property() public category: string;
 
   constructor() {
     super();
@@ -30,71 +30,6 @@ class ListingItem extends LitElement {
     this.price = this.price.replace(',00', '');
     this._lazyLoading();
   }
-
-  private _lazyLoading():void {
-    //TODO: this should be a new component like "<lazy-image />"
-    document.addEventListener("DOMContentLoaded", function() {
-      // @ts-ignore
-      let webcomponents = document.querySelectorAll("listing-item");
-      let active = false;
-      webcomponents.forEach((webcomponent) => {
-        let lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll("img.lazy"));
-        if ("IntersectionObserver" in window) {
-          let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                let lazyImage = entry.target;
-                // @ts-ignore
-                lazyImage.src = lazyImage.dataset.src;
-                // @ts-ignore
-                // lazyImage.srcset = lazyImage.dataset.srcset;
-                // @ts-ignore
-                lazyImage.classList.remove("lazy");
-                lazyImageObserver.unobserve(lazyImage);
-              }
-            });
-          });
-          // @ts-ignore
-          lazyImages.forEach(function(lazyImage) {
-            lazyImageObserver.observe(lazyImage);
-          });
-        } else {
-          // Possibly fall back to a more compatible method here
-          const lazyLoad = function() {
-            if (active === false) {
-              active = true;
-
-              setTimeout(function() {
-                lazyImages.forEach(function(lazyImage: any) {
-                  if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-                    lazyImage.src = lazyImage.dataset.src;
-                    lazyImage.classList.remove("lazy");
-
-                    lazyImages = lazyImages.filter(function(image: any) {
-                      return image !== lazyImage;
-                    });
-
-                    if (lazyImages.length === 0) {
-                      document.removeEventListener("scroll", lazyLoad);
-                      window.removeEventListener("resize", lazyLoad);
-                      window.removeEventListener("orientationchange", lazyLoad);
-                    }
-                  }
-                });
-
-                active = false;
-              }, 200);
-            }
-          };
-
-          document.addEventListener("scroll", lazyLoad);
-          window.addEventListener("resize", lazyLoad);
-          window.addEventListener("orientationchange", lazyLoad);
-        }
-      });
-    });
-  }
-
 
   public render(): TemplateResult {
     return html`
@@ -137,6 +72,72 @@ class ListingItem extends LitElement {
         </div>
       </section>
     `;
+  }
+
+  private _lazyLoading(): void {
+    // TODO: this should be a new component like "<lazy-image />"
+    document.addEventListener('DOMContentLoaded', () => {
+      // @ts-ignore
+      const webcomponents = document.querySelectorAll('listing-item');
+      let active = false;
+      webcomponents.forEach((webcomponent) => {
+        let lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll('img.lazy'));
+        if ('IntersectionObserver' in window) {
+          const lazyImageObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const lazyImage = entry.target;
+                // @ts-ignore
+                lazyImage.src = lazyImage.dataset.src;
+                // @ts-ignore
+                // lazyImage.srcset = lazyImage.dataset.srcset;
+                // @ts-ignore
+                lazyImage.classList.remove('lazy');
+                lazyImageObserver.unobserve(lazyImage);
+              }
+            });
+          });
+          // @ts-ignore
+          lazyImages.forEach((lazyImage) => {
+            lazyImageObserver.observe(lazyImage);
+          });
+        } else {
+          // Possibly fall back to a more compatible method here
+          const lazyLoad = () => {
+            if (active === false) {
+              active = true;
+
+              setTimeout(() => {
+                lazyImages.forEach((lazyImage: any) => {
+                  if ((lazyImage.getBoundingClientRect().top <= window.innerHeight &&
+                    lazyImage.getBoundingClientRect().bottom >= 0) &&
+                    getComputedStyle(lazyImage).display !== 'none') {
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove('lazy');
+
+                    lazyImages = lazyImages.filter((image: any) => {
+                      return image !== lazyImage;
+                    });
+
+                    if (lazyImages.length === 0) {
+                      document.removeEventListener('scroll', lazyLoad);
+                      window.removeEventListener('resize', lazyLoad);
+                      window.removeEventListener('orientationchange', lazyLoad);
+                    }
+                  }
+                });
+
+                active = false;
+              }, 200);
+            }
+          };
+
+          document.addEventListener('scroll', lazyLoad);
+          window.addEventListener('resize', lazyLoad);
+          window.addEventListener('orientationchange', lazyLoad);
+        }
+      });
+    });
   }
 }
 
