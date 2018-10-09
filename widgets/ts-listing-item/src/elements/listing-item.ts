@@ -18,6 +18,7 @@ class ListingItem extends LitElement {
   @property() public region: string;
   @property() public commune: string;
   @property() public category: string;
+  @property() public categoryName: string;
 
   constructor() {
     super();
@@ -59,7 +60,7 @@ class ListingItem extends LitElement {
         <div class="listingItem-infoLocation">
           <div class="listingItem-infoLocationRegion __locationRow">${this.region}</div>
           <div class="listingItem-infoLocationCommune __locationRow">${this.commune}</div>
-          <div class="listingItem-infoLocationCategory __locationRow">${this.category}</div>
+          <div class="listingItem-infoLocationCategory __locationRow">${this.categoryName}</div>
         </div>
 
         <div class="listingItem-infoIcons __mainColumn">
