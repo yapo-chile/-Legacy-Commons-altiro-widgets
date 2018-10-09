@@ -32,6 +32,7 @@ class ListingItem extends LitElement {
   }
 
   private _lazyLoading():void {
+    //TODO: this should be a new component like "<lazy-image />"
     document.addEventListener("DOMContentLoaded", function() {
       // @ts-ignore
       let webcomponents = document.querySelectorAll("listing-item");

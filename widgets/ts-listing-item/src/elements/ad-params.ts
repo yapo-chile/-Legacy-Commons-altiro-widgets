@@ -37,6 +37,18 @@ export class AdParams extends LitElement {
         icon = 'fal fa-expand';
         break;
       }
+      case 'regdate': {
+        icon = 'fal fa-calendar-alt';
+        break;
+      }
+      case 'mileage': {
+        icon = 'fal fa-tachometer';
+        break;
+      }
+      case 'gearbox': {
+        icon = 'fal fa-cogs';
+        break;
+      }
     }
     return html`
             <li class="listingItem-infoAdParam">

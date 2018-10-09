@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -29,6 +30,15 @@ module.exports = {
   output: {
     filename: '[name].bundled.js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    minimizer: [new TerserPlugin({terserOptions: {
+        ecma: 8,
+        mangle: {
+          safari10: true,
+        }, // Note `mangle.properties` is `false` by default.
+        safari10: true
+      }})]
   },
   plugins: [
     new HtmlWebPackPlugin({
