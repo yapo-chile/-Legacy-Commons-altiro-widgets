@@ -4,21 +4,21 @@ import css from './listing-item.css';
 
 class ListingItem extends LitElement {
 
-  @property() public isThumb: string;
+  @property({attribute: 'is-thumb'}) public isThumb: string;
   @property() public url: string = 'https://m.yapo.cl/img/m_prod_default.png';
   @property() public price: string;
-  @property() public adId: string;
+  @property({attribute: 'ad-id'}) public adId: string;
   @property() public label: string;
   @property() public location: string;
-  @property() public priceLowered: string;
-  @property() public adParams: string = '{}';
+  @property({attribute: 'price-lowered'}) public priceLowered: string;
+  @property({attribute: 'ad-params'}) public adParams: string = '{}';
   @property() public date: string;
-  @property() public isPro: string;
-  @property() public isFavorite: string;
+  @property({attribute: 'is-pro'}) public isPro: string;
+  @property({attribute: 'is-favorite'}) public isFavorite: string;
   @property() public region: string;
   @property() public commune: string;
   @property() public category: string;
-  @property() public categoryName: string;
+  @property({attribute: 'category-name'}) public categoryName: string;
 
   constructor() {
     super();
