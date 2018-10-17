@@ -5,7 +5,7 @@ import { TemplateResult } from 'lit-html/lit-html';
 export class AdParams extends LitElement {
 
   @property() public params: string;
-  public objectParam: any;
+  public objectParam: any = {};
 
   constructor() {
     super();
