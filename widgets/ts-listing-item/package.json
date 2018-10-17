@@ -1,6 +1,6 @@
 {
   "name": "@altiro-widgets/listing-item",
-  "version": "2.0.0",
+  "version": "2.0.1-alpha.0",
   "main": "index.js",
   "author": "Danilo Velasquez <danilo.velasquez@schibsted.cl>",
   "license": "MIT",
