@@ -63,6 +63,8 @@ class ListingItem extends LitElement {
               min-width: 122px;
               max-width: 122px;
               position: relative;
+              background-size: cover;
+              background-position: center center;
             }
       
             .listingItem-image::after {
@@ -74,9 +76,10 @@ class ListingItem extends LitElement {
               background: linear-gradient(180deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#000000',GradientType=0 );
               bottom: 0;
+              left: 0;
               content: '';
               height: 70px;
-           city: 0.1;
+              opacity: 0.1;
               position: absolute;
               width: 100%;
             }
@@ -205,25 +208,12 @@ class ListingItem extends LitElement {
                 display: flex;
               }
             }
-            /* This rule only applies for Safari*/
-            @media not all and (min-resolution:.001dpcm) {
-                @supports (-webkit-appearance:none) {
-                    .listingItem-image img {
-                      display:none;
-                    }
-                    .listingItem-image {
-                        background-image: url(${imageUrl});
-                        background-size: cover;
-                        background-position: center center;
-                    }
-                }
-            }
       </style>
       <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
       <section id="ad-${this.adId}" class="listingItem-box">
-        <div class="listingItem-image __mainColumn">
+        <div class="listingItem-image __mainColumn" style="background-image: url('${this.url}');">
           ${this.label && html`<span class="listingItem-imageLabel">${this.label}</span>`}
-          <img src="${imageUrl}" alt="${this.title}"/>
+          &nbsp;
         </div>
         <div class="listingItem-info __mainColumn">
           <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
