@@ -212,7 +212,7 @@ class ListingItem extends LitElement {
                       display:none;
                     }
                     .listingItem-image {
-                        background-image: url("${imageUrl}");
+                        background-image: url(${imageUrl});
                         background-size: cover;
                         background-position: center center;
                     }
