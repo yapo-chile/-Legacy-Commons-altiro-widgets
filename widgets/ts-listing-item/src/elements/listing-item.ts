@@ -29,7 +29,7 @@ class ListingItem extends LitElement {
       this.url = this.url.replace('thumb', 'image');
     }
     this.price = this.price.replace(',00', '');
-    this._lazyLoading();
+    // this._lazyLoading();
   }
 
   public render(): TemplateResult {
@@ -39,7 +39,7 @@ class ListingItem extends LitElement {
       <section id="ad-${this.adId}" class="listingItem-box">
         <div class="listingItem-image __mainColumn">
           ${this.label && html`<span class="listingItem-imageLabel">${this.label}</span>`}
-          <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${this.url}" alt="${this.title}"/>
+          <img src="${this.url}" alt="${this.title}"/>
         </div>
         <div class="listingItem-info __mainColumn">
           <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
