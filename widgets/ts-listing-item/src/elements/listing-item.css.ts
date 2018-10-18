@@ -175,9 +175,6 @@ const css = (url: string): any => {
       /* This rule only applies for Safari*/
       @media not all and (min-resolution:.001dpcm) {
           @supports (-webkit-appearance:none) {
-              .listingItem-image img {
-                display:none;
-              }
               .listingItem-image {
                   background-image: url("${url}");
                   background-size: cover;
