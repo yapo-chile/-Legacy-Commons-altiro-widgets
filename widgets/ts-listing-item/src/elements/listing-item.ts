@@ -32,6 +32,8 @@ class ListingItem extends LitElement {
   }
 
   public render(): TemplateResult {
+
+    const imageUrl = this.url;
     return html`
     <style>
       .listingItem-box {
@@ -210,7 +212,7 @@ class ListingItem extends LitElement {
                       display:none;
                     }
                     .listingItem-image {
-                        background-image: url("${this.url}");
+                        background-image: url("${imageUrl}");
                         background-size: cover;
                         background-position: center center;
                     }
@@ -221,7 +223,7 @@ class ListingItem extends LitElement {
       <section id="ad-${this.adId}" class="listingItem-box">
         <div class="listingItem-image __mainColumn">
           ${this.label && html`<span class="listingItem-imageLabel">${this.label}</span>`}
-          <img src="${this.url}" alt="${this.title}"/>
+          <img src="${imageUrl}" alt="${this.title}"/>
         </div>
         <div class="listingItem-info __mainColumn">
           <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
