@@ -1,6 +1,5 @@
 import {html, LitElement, property} from '@polymer/lit-element';
 import {TemplateResult} from 'lit-html/lit-html';
-import css from './listing-item.css';
 
 class ListingItem extends LitElement {
 
@@ -29,17 +28,192 @@ class ListingItem extends LitElement {
       this.url = this.url.replace('thumb', 'image');
     }
     this.price = this.price.replace(',00', '');
-    this._lazyLoading();
+    // this._lazyLoading();
   }
 
   public render(): TemplateResult {
+
+    const imageUrl = this.url;
     return html`
-      ${css(this.url)}
+    <style>
+      .listingItem-box {
+        background-color: var(--listing-item-background-color, #FFFFFF);
+        border-bottom: 2px solid #F8F8F8;
+        border-top: 2px solid #F8F8F8;
+        border-radius: 5px;
+        color: #000000;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        height: 140px;
+        width: 100%;
+      }
+
+      .listingItem-box .__mainColumn{
+        display: flex;
+        flex-direction: column;
+      }
+
+            .listingItem-box .__hidden{
+              display: none;
+            }
+      
+            .listingItem-image {
+              min-width: 122px;
+              max-width: 122px;
+              position: relative;
+              background-size: cover;
+              background-position: center center;
+            }
+      
+            .listingItem-image::after {
+              background: -moz-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(153,218,255,0)), color-stop(100%, rgba(0,0,0,1)));
+              background: -webkit-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+              background: -o-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+              background: -ms-linear-gradient(270deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+              background: linear-gradient(180deg, rgba(153,218,255,0) 0%, rgba(0,0,0,1) 100%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#000000',GradientType=0 );
+              bottom: 0;
+              left: 0;
+              content: '';
+              height: 70px;
+              opacity: 0.1;
+              position: absolute;
+              width: 100%;
+            }
+      
+            .listingItem-image img {
+              height: 100%;
+              object-fit: cover;
+              object-position: %;
+            }
+      
+            .listingItem-imageLabel {
+              background-color: #5f259f;
+              border-radius: 5px;
+              color: #FFFFFF;
+              font-size: 10px;
+              left: 5%;
+              padding: 5px;
+              position: absolute;
+              top: 5%;
+            }
+      
+            .listingItem-info {
+              flex-grow: 1;
+              justify-content: space-between;
+              padding: 10px;
+              padding-top: 19px;
+              padding-right: 0;
+              max-width: 85%;
+            }
+      
+            .listingItem-infoTitle {
+              font-size: 14px;
+              font-weight: 500;
+              height: 31px;
+              line-height: 15px;
+              margin: 0;
+              overflow: hidden;
+            }
+      
+            .listingItem-infoPrice {
+              font-size: 18px;
+              font-weight: bold;
+            }
+      
+            .listingItem-infoPrice .fa-arrow-to-bottom {
+              color: #52c300;
+              margin-right: 5px;
+            }
+      
+            .listingItem-infoAdParams {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+            }
+      
+            .listingItem-infoBottom {
+              font-size: 10px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            }
+      
+            .listingItem-infoBottomDate {
+              align-self: flex-end;
+              color: #666666;
+              font-size: 10px;
+              font-weight: normal;
+              margin-right: 10px;
+            }
+      
+            .listingItem-infoBottomType {
+              align-self: flex-end;
+              color: #4376b0;
+              font-size: 9px;
+              text-transform: uppercase;
+              justify-content: center;
+            }
+      
+            .listingItem-infoIcons {
+              font-size: 22px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding: 10px 3px;
+              min-width: 20px;
+              max-width: 20px;
+            }
+      
+            .listingItem-infoLocation {
+              flex-grow: 1;
+              font-size: 13px;
+              font-weight: 100;
+              display: none;
+              flex-direction: column;
+              padding-left: 30px;
+              justify-content: center;
+              width: 35%;
+            }
+      
+            .listingItem-infoLocation .__locationRow {
+              margin-bottom: 10px;
+            }
+      
+            .listingItem-infoLocation .__locationRow:last-child {
+              margin-bottom: 0;
+            }
+      
+            .listingItem-infoLastBottom {
+              color: #4376b0;
+            }
+      
+            @media (min-width: 700px) {
+              .listingItem-info {
+                min-width: 45%;
+                max-width: 45%;
+              }
+      
+              .listingItem-infoBottom {
+                justify-content: flex-start;
+              }
+      
+              .listingItem-infoLocation {
+                display: flex;
+              }
+            }
+      </style>
       <link rel="stylesheet" type="text/css" href="https://static.yapo.cl/shared/fonts/fa-5.0.13/css/fontawesome-all.css">
       <section id="ad-${this.adId}" class="listingItem-box">
-        <div class="listingItem-image __mainColumn">
+        <div class="listingItem-image __mainColumn" style="background-image: url('${this.url}');">
           ${this.label && html`<span class="listingItem-imageLabel">${this.label}</span>`}
-          <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="${this.url}" alt="${this.title}"/>
+          &nbsp;
         </div>
         <div class="listingItem-info __mainColumn">
           <h2 class="listingItem-infoTitle __infoRow" data-uno=${this.title}>
@@ -73,72 +247,6 @@ class ListingItem extends LitElement {
         </div>
       </section>
     `;
-  }
-
-  private _lazyLoading(): void {
-    // TODO: this should be a new component like "<lazy-image />"
-    document.addEventListener('DOMContentLoaded', () => {
-      // @ts-ignore
-      const webcomponents = document.querySelectorAll('listing-item');
-      let active = false;
-      webcomponents.forEach((webcomponent) => {
-        let lazyImages = [].slice.call(webcomponent.shadowRoot.querySelectorAll('img.lazy'));
-        if ('IntersectionObserver' in window) {
-          const lazyImageObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const lazyImage = entry.target;
-                // @ts-ignore
-                lazyImage.src = lazyImage.dataset.src;
-                // @ts-ignore
-                // lazyImage.srcset = lazyImage.dataset.srcset;
-                // @ts-ignore
-                lazyImage.classList.remove('lazy');
-                lazyImageObserver.unobserve(lazyImage);
-              }
-            });
-          });
-          // @ts-ignore
-          lazyImages.forEach((lazyImage) => {
-            lazyImageObserver.observe(lazyImage);
-          });
-        } else {
-          // Possibly fall back to a more compatible method here
-          const lazyLoad = () => {
-            if (active === false) {
-              active = true;
-
-              setTimeout(() => {
-                lazyImages.forEach((lazyImage: any) => {
-                  if ((lazyImage.getBoundingClientRect().top <= window.innerHeight &&
-                    lazyImage.getBoundingClientRect().bottom >= 0) &&
-                    getComputedStyle(lazyImage).display !== 'none') {
-                    lazyImage.src = lazyImage.dataset.src;
-                    lazyImage.classList.remove('lazy');
-
-                    lazyImages = lazyImages.filter((image: any) => {
-                      return image !== lazyImage;
-                    });
-
-                    if (lazyImages.length === 0) {
-                      document.removeEventListener('scroll', lazyLoad);
-                      window.removeEventListener('resize', lazyLoad);
-                      window.removeEventListener('orientationchange', lazyLoad);
-                    }
-                  }
-                });
-
-                active = false;
-              }, 200);
-            }
-          };
-
-          document.addEventListener('scroll', lazyLoad);
-          window.addEventListener('resize', lazyLoad);
-          window.addEventListener('orientationchange', lazyLoad);
-        }
-      });
-    });
   }
 }
 

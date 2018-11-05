@@ -6,6 +6,7 @@
   "jsRules": {},
   "rules": {
     "max-line-length": [true, 400],
+    "no-trailing-whitespace": false,
     "quotemark": [
       true,
       "single",
