@@ -1,4 +1,5 @@
 import {html, LitElement, property} from '@polymer/lit-element';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import {TemplateResult} from 'lit-html/lit-html';
 
 class InfoBox extends LitElement {
@@ -26,7 +27,7 @@ class InfoBox extends LitElement {
         flex-flow: column nowrap;
       }
       .info-box__icon {
-      
+        margin: 0 0 11px 0;
       }
       .info-box__title {
         font-family: Helvetica;
@@ -61,8 +62,10 @@ class InfoBox extends LitElement {
       ${this.icon && html
       `<img class="info-box__icon" src="${this.icon}" alt="icon">`
       }
-      <h1 class="info-box__title">${this.title}</h1>
-      <p class="info-box__content">${this.content}</p>
+      ${this.title && html`
+      <h1 class="info-box__title">${this.title}</h1>`
+      }
+      <p class="info-box__content">${unsafeHTML(this.content)}</p>
       ${this.elements && html
       `<div class="info-box__elements">
          <info-box-item elements="${this.elements}"></info-box-item>

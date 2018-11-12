@@ -1,5 +1,4 @@
 import { html, LitElement, property } from '@polymer/lit-element';
-// import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 import { TemplateResult } from 'lit-html/lit-html';
 
 export class InfoBoxItem extends LitElement {
