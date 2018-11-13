@@ -12,7 +12,6 @@ class InfoBox extends LitElement {
   constructor() {
     super();
   }
-
   public render(): TemplateResult {
 
     return html`
@@ -55,6 +54,12 @@ class InfoBox extends LitElement {
       
       .info-box__elements {
         margin-top: 20px;
+      }
+      
+      @media (max-width: 700px) {
+        .info-box__icon {
+            margin: 0 0 15px 0;
+        }
       }
       
     </style>

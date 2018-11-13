@@ -4,7 +4,7 @@ import { TemplateResult } from 'lit-html/lit-html';
 export class InfoBoxItem extends LitElement {
 
   @property() public elements: string = '[]';
-  public objectElements: any[] = [];
+  private objectElements: Array<{icon: string, title: string, color: string, description: string}> = [];
 
   constructor() {
     super();
@@ -83,6 +83,18 @@ export class InfoBoxItem extends LitElement {
         }
         .info-box-item__element {
             max-width: 140px;
+            padding: 23px 5px;
+        }
+        .info-box-item__icon {
+            width: 35px;
+            height: 34px;
+            margin-bottom: 7px;
+        }
+        .info-box-item__description {
+            font-size: 10px;
+        }
+        .info-box-item__title {
+            font-size: 11px;
         }
       }
     </style>
