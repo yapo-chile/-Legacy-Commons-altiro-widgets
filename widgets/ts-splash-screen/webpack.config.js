@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
-    'listing-item': ['./src/index.ts']
+    'splash-screen': ['./src/index.ts']
   },
   devtool: 'hidden-source-map',
   module: {
