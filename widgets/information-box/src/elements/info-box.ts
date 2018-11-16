@@ -27,6 +27,7 @@ class InfoBox extends LitElement {
       }
       .info-box__icon {
         margin: 0 0 11px 0;
+        width: auto;
       }
       .info-box__title {
         font-family: Helvetica;

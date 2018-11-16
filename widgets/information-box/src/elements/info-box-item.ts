@@ -36,10 +36,12 @@ export class InfoBoxItem extends LitElement {
       .info-box-item__element {
         display: flex;
         flex-flow: column wrap;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         width: 160px;
         padding: 33px 5px;
+        border-radius: 3px;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.12);
       }
       .info-box-item__title {
         font-family: Helvetica;
@@ -54,7 +56,7 @@ export class InfoBoxItem extends LitElement {
       }
       
       .info-box-item__description {
-        font-family: HelveticaNeue;
+        font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
         font-size: 12px;
         font-weight: 300;
         font-style: normal;
@@ -84,6 +86,7 @@ export class InfoBoxItem extends LitElement {
         .info-box-item__element {
             max-width: 140px;
             padding: 23px 5px;
+            margin-bottom: 10px;
         }
         .info-box-item__icon {
             width: 35px;
