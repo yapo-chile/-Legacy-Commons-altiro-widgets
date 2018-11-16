@@ -3,23 +3,14 @@ import {TemplateResult} from 'lit-html/lit-html';
 
 class SplashScreen extends LitElement {
 
- 
   @property() public url: string = 'https://info.yapo.cl/?landingpage=yapo-pago-y-despacho';
-  @property() public imageUrl: string ='https://static.yapo.cl/mails/img/splash-top.jpg';
-  
+  @property() public imageUrl: string = 'https://static.yapo.cl/mails/img/splash-top.jpg';
   @property() private display: string = 'flex';
 
   constructor() {
     super();
-  }  
-  private closeModal() {
-    this.display ="none";
-  }
+  } 
 
-  private goToLanding(){
-    location.href=this.url;
-  }
-  
   public render(): TemplateResult {
 
     return html`
@@ -91,6 +82,15 @@ class SplashScreen extends LitElement {
       </div>
     `;
   }
+
+  private closeModal() {
+    this.display = 'none';
+  }
+
+  private goToLanding() {
+    location.href = this.url;
+  }
+  
 }
 
 window.customElements.define('splash-screen', SplashScreen);
