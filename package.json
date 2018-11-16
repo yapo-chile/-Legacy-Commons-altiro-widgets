@@ -41,6 +41,6 @@
     "storybook-readme": "^4.0.0-beta1"
   },
   "dependencies": {
-    "@polymer/lit-element": "^0.6.1"
+    "@polymer/lit-element": "^0.6.2"
   }
 }
