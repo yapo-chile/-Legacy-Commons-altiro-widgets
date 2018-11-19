@@ -67,6 +67,8 @@ class SplashScreen extends LitElement {
         margin: 0 auto 0 auto;
      }
      .splashScreen-button-close {
+        width: 62px;
+        height: 19px;
         font-family: Helvetica;
         font-size: 16px;
         font-weight: 100;
