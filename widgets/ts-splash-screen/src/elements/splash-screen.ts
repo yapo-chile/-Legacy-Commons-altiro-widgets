@@ -26,8 +26,7 @@ class SplashScreen extends LitElement {
     *{box-sizing: content-box }
      .splashScreen {
         width: 100%;
-        height: 100%;
-      
+        height: auto;
         display: flex;
         flex-flow: column nowrap;    
 
@@ -67,7 +66,6 @@ class SplashScreen extends LitElement {
         margin: 0 auto 0 auto;
      }
      .splashScreen-button-close {
-        width: 62px;
         height: 19px;
         font-family: Helvetica;
         font-size: 16px;
