@@ -15,6 +15,14 @@ class SplashScreen extends LitElement {
 
     return html`
     <style>
+    :host { 
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: auto;
+      z-index: 9999999; 
+    }
     *{box-sizing: content-box }
      .splashScreen {
         width: 100%;
