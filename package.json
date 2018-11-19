@@ -42,5 +42,9 @@
   },
   "dependencies": {
     "@polymer/lit-element": "^0.6.2"
-  }
+  },
+  "resolutions": {
+    "@lerna/publish": "3.4.1"
+   }	   
 }
+
