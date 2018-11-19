@@ -23,5 +23,4 @@ The code linting is made with Standard JS.
 
 ## TODO
 * [ ] Implement unit tests (preferably with jest)
-* [ ] Find a way to use SASS
-* [ ] Use partials instead of big ES 6 template strings
+

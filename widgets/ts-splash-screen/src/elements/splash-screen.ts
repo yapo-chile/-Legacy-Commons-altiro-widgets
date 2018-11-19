@@ -84,7 +84,7 @@ class SplashScreen extends LitElement {
       <div class="splashScreen" style="display:${this.display};">    
         <img class="splashScreen-image" src="${this.imageUrl}">     
         <div class="splashScreen-rectangle">
-          <button class="splashScreen-button-open" type="submit" @click="${() => this.goToLanding()}">Abrir</button>
+          <button class="splashScreen-button-open" type="submit" @click="${() => this.goToURL()}">Abrir</button>
           <button class="splashScreen-button-close" type="submit" @click="${() => this.closeModal()}">Cancelar</button>
         </div>
       </div>
@@ -95,7 +95,7 @@ class SplashScreen extends LitElement {
     this.display = 'none';
   }
 
-  private goToLanding() {
+  private goToURL() {
     location.href = this.url;
   }
   
