@@ -42,6 +42,7 @@ class InfoBox extends LitElement {
         margin: 0 0 15px 0;
       }
       .info-box__content {
+        display: inline-block;
         font-family: Helvetica;
         font-size: 14px;
         font-weight: 300;
@@ -51,6 +52,10 @@ class InfoBox extends LitElement {
         letter-spacing: normal;
         text-align: center;
         color: #666666;
+      }
+      
+      .info-box__content strong {
+        display: inline;
       }
       
       .info-box__elements {
