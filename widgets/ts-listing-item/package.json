@@ -22,7 +22,7 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "@polymer/lit-element": "^0.6.1",
+    "@polymer/lit-element": "^0.6.3",
     "shared-dependencies": "^2.0.2"
   }
 }
