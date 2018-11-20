@@ -22,16 +22,16 @@ class SplashScreen extends LitElement {
       top: 0;
       right: 0;
       width: 100%;
-      height: auto;
-      z-index: 9999999; 
+      height: 100vh;
+      z-index: 9999999;
+      overflow-y: hidden;
     }
     *{box-sizing: content-box }
      .splashScreen {
         width: 100%;
         height: auto;
         display: flex;
-        flex-flow: column nowrap;    
-
+        flex-flow: column nowrap;
      }
      .splashScreen-image {
         width: 100%;
