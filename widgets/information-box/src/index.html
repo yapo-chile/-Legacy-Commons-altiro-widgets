@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>info box</title>
+
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+
+    }
+    info-box {
+        max-width: 710px;
+        width: 100%;
+        padding: 10px;
+    }
+  </style>
+</head>
+<body>
+    <info-box
+            icon="https://static.yapo.cl/projects/altiro-payment-delivery/icons/avisopublicado.svg"
+            title="¡Gracias por publicar!"
+            content='Tu aviso <strong>"Vestido"</strong> será revisado y si está de acuerdo con las reglas de Yapo.cl, lo publicaremos en los próximos minutos.'>
+
+    </info-box>
+    <info-box
+            elements='[{"title":"Ventas más rápidas", "description":"Tus potenciales compradores se multiplican.", "color":"#ff6105", "icon":"https://static.yapo.cl/projects/altiro-payment-delivery/icons/wallet.svg"},{"title":"Sin moverte de tu casa", "description":"Vamos a retirar el producto donde tú prefieras.", "color":"#ff842c", "icon":"https://static.yapo.cl/projects/altiro-payment-delivery/icons/delivery.svg"}, {"title":"¡Envío gratis!", "description":"Los costos de envío los asumirá el comprador.", "color":"#ff9f00", "icon":"https://static.yapo.cl/projects/altiro-payment-delivery/icons/truck.svg"}, {"title":"Garantía de devolución", "description":"Tu dinero será retenido como garantía de pago hasta que el comprador acepte lo que enviaste.", "color":"#31589e", "icon":"https://static.yapo.cl/projects/altiro-payment-delivery/icons/handmoney.svg"}]'
+            icon="https://static.yapo.cl/projects/altiro-payment-delivery/icons/title.svg"
+            content="Tu aviso tendrá habilitado nuestro nuevo servicio de <strong>Pago y Despacho</strong>, el que no tiene cobros adicionales para ti como vendedor, ya que el que paga es el comprador de tu producto. Si alguien está interesado en tu aviso, te notificaremos por correo o en tu perfil de Yapo.cl para que aceptes la oferta.">
+
+    </info-box>
+</body>
+</html>

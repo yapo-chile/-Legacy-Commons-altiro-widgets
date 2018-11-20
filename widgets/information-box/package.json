@@ -1,8 +1,8 @@
 {
-  "name": "@altiro-widgets/listing-item",
-  "version": "2.1.0",
+  "name": "@altiro-widgets/information-box",
+  "version": "2.0.0",
   "main": "index.js",
-  "author": "Danilo Velasquez <danilo.velasquez@schibsted.cl>",
+  "author": " <felipe.egas@schibsted.com>",
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
@@ -22,7 +22,6 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "@polymer/lit-element": "^0.6.3",
-    "shared-dependencies": "^2.0.2"
+    "@polymer/lit-element": "^0.6.3"
   }
 }
