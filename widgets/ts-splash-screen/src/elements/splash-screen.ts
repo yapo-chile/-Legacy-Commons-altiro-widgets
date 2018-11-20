@@ -6,6 +6,8 @@ class SplashScreen extends LitElement {
   @property() public url: string = 'https://info.yapo.cl/?landingpage=yapo-pago-y-despacho';
   @property() public imageUrl: string = 'https://static.yapo.cl/mails/img/splash-top.jpg';
   @property() private display: string = 'flex';
+  @property() private buttonOpen: string = 'Abrir';
+  @property() private buttonCancel: string = 'Cancelar';
 
   constructor() {
     super();
@@ -84,8 +86,8 @@ class SplashScreen extends LitElement {
       <div class="splashScreen" style="display:${this.display};">    
         <img class="splashScreen-image" src="${this.imageUrl}">     
         <div class="splashScreen-rectangle">
-          <button class="splashScreen-button-open" type="submit" @click="${() => this.goToURL()}">Abrir</button>
-          <button class="splashScreen-button-close" type="submit" @click="${() => this.closeModal()}">Cancelar</button>
+          <button class="splashScreen-button-open" type="submit" @click="${() => this.goToURL()}">${this.buttonOpen}</button>
+          <button class="splashScreen-button-close" type="submit" @click="${() => this.closeModal()}">${this.buttonCancel}</button>
         </div>
       </div>
     `;
