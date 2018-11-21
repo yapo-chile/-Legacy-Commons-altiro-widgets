@@ -4,7 +4,16 @@ import {TemplateResult} from 'lit-html/lit-html';
 class SplashScreen extends LitElement {
 
   @property() public url: string = 'https://info.yapo.cl/?landingpage=yapo-pago-y-despacho';
-  @property() public imageUrl: string = 'https://static.yapo.cl/mails/img/splash-top.jpg';
+  @property() public imageUrl: string = 'https://static.yapo.cl/mails/img/frente-pd-splash.png';
+  @property() public imageUrl2x: string = 'https://static.yapo.cl/mails/img/frente-pd-splash@2x.png';
+  @property() public imageUrl3x: string = 'https://static.yapo.cl/mails/img/frente-pd-splash@3x.png';
+
+  @property() public backgroundImg: string ='https://static.yapo.cl/mails/img/fondo-pd-splash.jpg';
+  @property() public backgroundImg2x: string ='https://static.yapo.cl/mails/img/fondo-pd-splash@2x.jpg';
+  @property() public backgroundImg3x: string ='https://static.yapo.cl/mails/img/fondo-pd-splash@3x.jpg';
+
+
+
   @property() private display: string = 'flex';
   @property() private buttonOpen: string = 'Abrir';
   @property() private buttonCancel: string = 'Cancelar';
@@ -33,19 +42,31 @@ class SplashScreen extends LitElement {
         display: flex;
         flex-flow: column nowrap;
      }
-     .splashScreen-image {
+     .splashScreen-image-container {
+        max-width: 100%;
+        height: calc(100vh - 134px);
         width: 100%;
+        overflow: hidden;
+     }
+     .splashScreen-image {
+        max-width: 100%;
+        height: calc(100vh - 134px);
+        width: 100%;
+        object-fit: contain;
+        align-self: center;
+        padding: 25px;
      }
      .splashScreen-rectangle {
+        position: absolute;
+        bottom: 0;
         width: 100%;
+        max-height: 134px important;
         height: 134px;
         background-color: #ff6600;
         margin: 0 !important;
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-evenly;
-        aling-items: stretch;
-        align-self: flex-end;
       }
      .splashScreen-button-open {
         width: 42%;
@@ -84,7 +105,9 @@ class SplashScreen extends LitElement {
   
     </style>
       <div class="splashScreen" style="display:${this.display};">    
-        <img class="splashScreen-image" src="${this.imageUrl}">     
+        <div class="splashScreen-image-container" style="background-image: url(${this.backgroundImg});">
+          <img class="splashScreen-image" src="${this.imageUrl}" >     
+        <div>
         <div class="splashScreen-rectangle">
           <button class="splashScreen-button-open" type="submit" @click="${() => this.goToURL()}">${this.buttonOpen}</button>
           <button class="splashScreen-button-close" type="submit" @click="${() => this.closeModal()}">${this.buttonCancel}</button>
