@@ -4,23 +4,16 @@ import {TemplateResult} from 'lit-html/lit-html';
 class SplashScreen extends LitElement {
 
   @property() public url: string = 'https://info.yapo.cl/?landingpage=yapo-pago-y-despacho';
-  @property() public imageUrl: string = 'https://static.yapo.cl/mails/img/frente-pd-splash.png';
-  @property() public imageUrl2x: string = 'https://static.yapo.cl/mails/img/frente-pd-splash@2x.png';
-  @property() public imageUrl3x: string = 'https://static.yapo.cl/mails/img/frente-pd-splash@3x.png';
-
-  @property() public backgroundImg: string ='https://static.yapo.cl/mails/img/fondo-pd-splash.jpg';
-  @property() public backgroundImg2x: string ='https://static.yapo.cl/mails/img/fondo-pd-splash@2x.jpg';
-  @property() public backgroundImg3x: string ='https://static.yapo.cl/mails/img/fondo-pd-splash@3x.jpg';
-
-
-
+  @property() public imageUrl: string = 'https://static.yapo.cl/projects/altiro-payment-delivery/pd-guru.png';
+  @property() public closeImage: string = 'https://static.yapo.cl/projects/altiro-payment-delivery/cerrar.png';
+  @property() public backgroundImg: string = 'https://static.yapo.cl/projects/altiro-payment-delivery/fondo-pd.png';
   @property() private display: string = 'flex';
   @property() private buttonOpen: string = 'Abrir';
-  @property() private buttonCancel: string = 'Cancelar';
+  @property() private buttonClose: string = 'Cerrar';
 
   constructor() {
     super();
-  } 
+  }
 
   public render(): TemplateResult {
 
@@ -33,7 +26,7 @@ class SplashScreen extends LitElement {
       width: 100%;
       height: 100vh;
       z-index: 9999999;
-      overflow-y: hidden;
+      overflow-y: scroll;
     }
     *{box-sizing: content-box }
      .splashScreen {
@@ -47,20 +40,20 @@ class SplashScreen extends LitElement {
         height: calc(100vh - 134px);
         width: 100%;
         overflow: hidden;
+        margin: 0 0 20px 0;
      }
      .splashScreen-image {
         max-width: 100%;
         height: calc(100vh - 134px);
         width: 100%;
-        object-fit: contain;
+        object-fit: scale-down;
         align-self: center;
-        padding: 25px;
      }
      .splashScreen-rectangle {
-        position: absolute;
+        position: sticky;
         bottom: 0;
         width: 100%;
-        max-height: 134px important;
+        max-height: 134px !important;
         height: 134px;
         background-color: #ff6600;
         margin: 0 !important;
@@ -102,15 +95,23 @@ class SplashScreen extends LitElement {
         background: none;
         color: #ffffff;
    }
+   .splash-screen-close-image {
+       margin: 20px 20px 24px 0;
+       width: 15px;
+       height: 15px;
+       object-fit: contain;
+       align-self: flex-end;
+   }
   
     </style>
-      <div class="splashScreen" style="display:${this.display};">    
-        <div class="splashScreen-image-container" style="background-image: url(${this.backgroundImg});">
-          <img class="splashScreen-image" src="${this.imageUrl}" >     
-        <div>
+      <div class="splashScreen" style="display:${this.display}; background-image: url(${this.backgroundImg});">
+       <img class="splash-screen-close-image" src="${this.closeImage}" @click="${() => this.closeModal()}" />
+        <div class="splashScreen-image-container">
+          <img class="splashScreen-image" src="${this.imageUrl}" />     
+        </div>
         <div class="splashScreen-rectangle">
-          <button class="splashScreen-button-open" type="submit" @click="${() => this.goToURL()}">${this.buttonOpen}</button>
-          <button class="splashScreen-button-close" type="submit" @click="${() => this.closeModal()}">${this.buttonCancel}</button>
+          <button class="splashScreen-button-open"  @click="${() => this.goToURL()}">${this.buttonOpen}</button>
+          <button class="splashScreen-button-close" @click="${() => this.closeModal()}">${this.buttonClose}</button>
         </div>
       </div>
     `;
@@ -123,7 +124,7 @@ class SplashScreen extends LitElement {
   private goToURL() {
     location.href = this.url;
   }
-  
+
 }
 
 window.customElements.define('splash-screen', SplashScreen);
