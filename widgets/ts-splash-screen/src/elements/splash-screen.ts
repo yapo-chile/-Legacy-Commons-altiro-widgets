@@ -19,19 +19,16 @@ class SplashScreen extends LitElement {
 
     return html`
     <style>
-    :host(body) { 
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: 9999999;
-      overflow-y: hidden;
-    }
+  
     *{box-sizing: content-box }
      .splashScreen {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 9999999;
+        overflow-y: scroll;
         width: 100%;
-        height: auto;
+        height: 100vh;
         display: flex;
         flex-flow: column nowrap;
      }
