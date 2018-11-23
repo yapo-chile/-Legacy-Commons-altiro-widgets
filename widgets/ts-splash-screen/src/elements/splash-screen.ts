@@ -19,14 +19,14 @@ class SplashScreen extends LitElement {
 
     return html`
     <style>
-    :host { 
+    :host(body) { 
       position: absolute;
       top: 0;
       right: 0;
       width: 100%;
       height: 100vh;
       z-index: 9999999;
-      overflow-y: scroll;
+      overflow-y: hidden;
     }
     *{box-sizing: content-box }
      .splashScreen {
@@ -105,7 +105,11 @@ class SplashScreen extends LitElement {
   
     </style>
       <div class="splashScreen" style="display:${this.display}; background-image: url(${this.backgroundImg});">
-       <img class="splash-screen-close-image" src="${this.closeImage}" @click="${() => this.closeModal()}" />
+       <img class="splash-screen-close-image yapo-tag" src="${this.closeImage}" 
+        @click="${() => this.closeModal()}" 
+        data-yapo-tag-clickname="splash_screen&#58;&#58;&#58;&#58;&#58;&#58;close_on_top"
+	    data-yapo-tag-type="A"/
+	   >
         <div class="splashScreen-image-container">
           <img class="splashScreen-image" src="${this.imageUrl}" />     
         </div>
