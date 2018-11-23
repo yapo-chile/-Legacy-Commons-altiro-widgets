@@ -19,7 +19,6 @@ class SplashScreen extends LitElement {
 
     return html`
     <style>
-  
     *{box-sizing: content-box }
      .splashScreen {
         position: absolute;
